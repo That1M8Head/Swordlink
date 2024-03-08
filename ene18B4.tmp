@@ -1,0 +1,135 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4aijab17wj50"]
+
+[ext_resource type="Texture2D" uid="uid://ckcfwheygjkwm" path="res://Sprites/pinky.png" id="1_1dcm3"]
+[ext_resource type="Texture2D" uid="uid://dk8gpmeyhreoj" path="res://Sprites/pinky_attack1.png" id="1_35di4"]
+[ext_resource type="Script" path="res://PinkyBehaviour.gd" id="1_f0eab"]
+[ext_resource type="Texture2D" uid="uid://bb3ufqr0q45jv" path="res://Sprites/pinky_attack2.png" id="2_1ow8d"]
+[ext_resource type="Texture2D" uid="uid://dqtdlvgormq5o" path="res://Sprites/pinky2.png" id="2_w0i3j"]
+[ext_resource type="Texture2D" uid="uid://cxqhfig3nnr1b" path="res://Sprites/pinky_attack3.png" id="3_hcpfx"]
+[ext_resource type="Texture2D" uid="uid://mwm15qiqka46" path="res://Sprites/pinky_run1.png" id="6_15kyq"]
+[ext_resource type="Texture2D" uid="uid://l3ioear4uxrm" path="res://Sprites/pinky_run2.png" id="7_x0yje"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bagne"]
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_fm67s"]
+resource_name = "display_then_fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_688dd"]
+_data = {
+"display_then_fade_out": SubResource("Animation_fm67s")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_74cdl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_35di4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1ow8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hcpfx")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1dcm3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w0i3j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_15kyq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x0yje")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gltal"]
+size = Vector2(60, 54)
+
+[node name="EnemyObj" type="Node2D"]
+
+[node name="Pinky" type="CharacterBody2D" parent="."]
+collision_mask = 2
+script = ExtResource("1_f0eab")
+
+[node name="DamageNumber" type="Label" parent="Pinky"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -72.0
+offset_right = 55.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(54.96, 37.14)
+text = "-0"
+label_settings = SubResource("LabelSettings_bagne")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pinky/DamageNumber"]
+libraries = {
+"": SubResource("AnimationLibrary_688dd")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pinky"]
+sprite_frames = SubResource("SpriteFrames_74cdl")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pinky"]
+shape = SubResource("RectangleShape2D_gltal")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Pinky"]
+
+[node name="AttackRaycast" type="RayCast2D" parent="Pinky"]
+target_position = Vector2(-512, 0)
+collide_with_areas = true
+
+[node name="FlipRaycast" type="RayCast2D" parent="Pinky"]
+target_position = Vector2(512, 0)
+
+[connection signal="screen_exited" from="Pinky/VisibleOnScreenNotifier2D" to="Pinky" method="_on_visible_on_screen_notifier_2d_screen_exited"]

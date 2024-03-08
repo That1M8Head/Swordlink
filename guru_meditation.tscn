@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://cff8ltb72ojw2"]
+
+[ext_resource type="Script" path="res://Scripts/GuruMeditation.gd" id="1_sgdom"]
+
+[sub_resource type="SystemFont" id="SystemFont_y87wb"]
+font_names = PackedStringArray("JetBrains Mono", "Source Code Pro", "Consolas", "Monospace")
+font_weight = 600
+hinting = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6y21"]
+font = SubResource("SystemFont_y87wb")
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_qe44h"]
+resource_name = "flashing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, Color(1, 0, 0, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqoul"]
+_data = {
+"flashing": SubResource("Animation_qe44h")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_ni3pw"]
+font_names = PackedStringArray("JetBrains Mono", "Source Code Pro", "Consolas", "Monospace")
+font_weight = 600
+hinting = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_x0r1t"]
+font = SubResource("SystemFont_ni3pw")
+font_size = 20
+font_color = Color(1, 1, 1, 0.509804)
+
+[node name="GuruMeditation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sgdom")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Error" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 217.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="Box" type="ColorRect" parent="Background/Error"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InnerBoxMargin" type="MarginContainer" parent="Background/Error/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ColorRect" type="ColorRect" parent="Background/Error/Box/InnerBoxMargin"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ErrorMessage" type="Label" parent="Background/Error/Box/InnerBoxMargin"]
+layout_mode = 2
+text = "Software Failure. RESTART_INSTRUCTION to continue.
+Guru Meditation #66656C6C.206F6666.20737461.67650000"
+label_settings = SubResource("LabelSettings_f6y21")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/Error/Box"]
+root_node = NodePath("../InnerBoxMargin/ColorRect")
+libraries = {
+"": SubResource("AnimationLibrary_xqoul")
+}
+autoplay = "flashing"
+
+[node name="Reassurance" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -623.0
+offset_top = -40.0
+offset_right = 623.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is just an Easter egg. Your computer/device/console/smart fridge is fine, I promise."
+label_settings = SubResource("LabelSettings_x0r1t")
+horizontal_alignment = 1

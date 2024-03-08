@@ -1,0 +1,472 @@
+[gd_scene load_steps=32 format=3 uid="uid://ci7w0j3fy13pi"]
+
+[ext_resource type="Texture2D" uid="uid://6a8llpsho646" path="res://Textures/FloorTexture.png" id="1_6l14n"]
+[ext_resource type="Texture2D" uid="uid://yq761kxcelxj" path="res://Textures/HealthEmpty.png" id="1_n5qen"]
+[ext_resource type="Script" path="res://Scripts/JoelMovements.gd" id="2_klvbf"]
+[ext_resource type="Script" path="res://Scripts/CameraControls.gd" id="2_la4jp"]
+[ext_resource type="Texture2D" uid="uid://85utqxsiiilk" path="res://Sprites/joel.png" id="2_w7i37"]
+[ext_resource type="Texture2D" uid="uid://dgh0i2wg31ap2" path="res://Textures/HealthFull.png" id="2_wtvta"]
+[ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="3_md8pn"]
+[ext_resource type="Texture2D" uid="uid://bu6co4c1bjprt" path="res://Sprites/joelsword.png" id="4_bs3jm"]
+[ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Touch Buttons/UpButton.png" id="7_2ivfp"]
+[ext_resource type="PackedScene" uid="uid://b4aijab17wj50" path="res://enemy_obj.tscn" id="7_podgw"]
+[ext_resource type="AudioStream" uid="uid://d374i34rldnno" path="res://Music/public enemy.mp3" id="8_2asuu"]
+[ext_resource type="Texture2D" uid="uid://dvu3l1s8y4xnf" path="res://Touch Buttons/AttackButton.png" id="8_61562"]
+[ext_resource type="Texture2D" uid="uid://bubu2uh6gcqc2" path="res://Touch Buttons/StingerButton.png" id="9_p15gg"]
+[ext_resource type="PackedScene" uid="uid://dmle2nwaecon7" path="res://platform.tscn" id="10_n56ep"]
+[ext_resource type="Texture2D" uid="uid://c43nueh1020nw" path="res://Touch Buttons/LeftButton.png" id="11_f5sex"]
+[ext_resource type="Texture2D" uid="uid://olk4nwvalbsp" path="res://Touch Buttons/RightButton.png" id="12_og731"]
+[ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Touch Buttons/BackButton.png" id="13_lmq0m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_12w10"]
+line_spacing = 0.0
+font_size = 100
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.462745)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hgmtc"]
+line_spacing = 0.0
+font_size = 26
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.443137)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1csh"]
+size = Vector2(1920, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mqrh"]
+size = Vector2(20, 818)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v1uwb"]
+distance = -479.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mf8mb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w7i37")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8224p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bs3jm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ayd0m"]
+resource_name = "stinger"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 1.5708, 1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y6ew8"]
+resource_name = "stinger_left"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.1, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, -1.5708, -1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3mfhj"]
+resource_name = "sword_slash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.506145, 3.14159, 3.14159, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_sgby0"]
+resource_name = "sword_slash_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.506145, -3.14159, -3.14159, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h3h3n"]
+_data = {
+"stinger": SubResource("Animation_ayd0m"),
+"stinger_left": SubResource("Animation_y6ew8"),
+"sword_slash": SubResource("Animation_3mfhj"),
+"sword_slash_left": SubResource("Animation_sgby0")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upen2"]
+size = Vector2(26, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qryhf"]
+size = Vector2(42, 79)
+
+[node name="Game" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 234.0
+grow_horizontal = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/HUD"]
+layout_mode = 1
+offset_left = 57.0
+offset_top = 57.0
+offset_right = 912.0
+offset_bottom = 121.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_n5qen")
+texture_progress = ExtResource("2_wtvta")
+
+[node name="Style" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 141.0
+offset_right = 911.0
+offset_bottom = 230.0
+
+[node name="Meter" type="ProgressBar" parent="CanvasLayer/HUD/Style"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -16.5
+offset_bottom = 36.5
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1000.0
+show_percentage = false
+
+[node name="Rank" type="VBoxContainer" parent="CanvasLayer/HUD/Style"]
+layout_mode = 0
+offset_left = 891.0
+offset_top = -96.0
+offset_right = 998.0
+offset_bottom = 81.0
+alignment = 1
+
+[node name="Letter" type="Label" parent="CanvasLayer/HUD/Style/Rank"]
+layout_mode = 2
+text = "F"
+label_settings = SubResource("LabelSettings_12w10")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Name" type="Label" parent="CanvasLayer/HUD/Style/Rank"]
+layout_mode = 2
+text = "Frick Off"
+label_settings = SubResource("LabelSettings_hgmtc")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TouchButtons" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("3_md8pn")
+
+[node name="Menu" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
+position = Vector2(79, 54)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("13_lmq0m")
+action = "Menu"
+visibility_mode = 1
+
+[node name="Left" type="Node2D" parent="CanvasLayer/TouchButtons"]
+position = Vector2(70, 680)
+
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Left"]
+texture_normal = ExtResource("11_f5sex")
+action = "MoveLeft"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Left"]
+position = Vector2(320, 0)
+texture_normal = ExtResource("12_og731")
+action = "MoveRight"
+visibility_mode = 1
+
+[node name="Right" type="Node2D" parent="CanvasLayer/TouchButtons"]
+position = Vector2(1870, 680)
+
+[node name="Jump" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
+position = Vector2(-575, 0)
+texture_normal = ExtResource("7_2ivfp")
+action = "Jump"
+visibility_mode = 1
+
+[node name="Attack" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
+position = Vector2(-255, 0)
+texture_normal = ExtResource("8_61562")
+action = "Attack"
+visibility_mode = 1
+
+[node name="Stinger" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
+position = Vector2(-255, -319)
+texture_normal = ExtResource("9_p15gg")
+action = "QuickStinger"
+visibility_mode = 1
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -168.0
+offset_right = 2247.0
+offset_bottom = 1308.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47451, 0.54902, 0.607843, 1)
+
+[node name="Platform1" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(1354, 320)
+
+[node name="Platform2" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(1498, 452)
+
+[node name="Platform3" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(607, 552)
+
+[node name="Platform4" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(798, 552)
+
+[node name="Platform5" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(343, 599)
+
+[node name="Platform6" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(138, 704)
+
+[node name="Platform7" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(1237, 547)
+
+[node name="Platform8" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(1048, 209)
+
+[node name="Platform9" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(509, 206)
+
+[node name="Platform10" parent="." instance=ExtResource("10_n56ep")]
+position = Vector2(138, 203)
+
+[node name="Stage" type="TextureRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 820.0
+offset_right = 1920.0
+offset_bottom = 1298.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_6l14n")
+stretch_mode = 1
+
+[node name="Coolissive" type="StaticBody2D" parent="Stage"]
+collision_layer = 3
+
+[node name="Floor" type="CollisionShape2D" parent="Stage/Coolissive"]
+position = Vector2(960, 10)
+shape = SubResource("RectangleShape2D_a1csh")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Stage/Coolissive"]
+position = Vector2(-12, -385)
+shape = SubResource("RectangleShape2D_0mqrh")
+
+[node name="RightWall" type="CollisionShape2D" parent="Stage/Coolissive"]
+position = Vector2(1895, -409)
+shape = SubResource("RectangleShape2D_0mqrh")
+
+[node name="OffStage" type="Area2D" parent="Stage"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/OffStage"]
+shape = SubResource("WorldBoundaryShape2D_v1uwb")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(383, 703)
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_right = 1920
+position_smoothing_speed = 35.0
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+script = ExtResource("2_la4jp")
+
+[node name="Joel" type="CharacterBody2D" parent="." groups=["Player"]]
+position = Vector2(104, 715)
+script = ExtResource("2_klvbf")
+
+[node name="JoelSprite" type="AnimatedSprite2D" parent="Joel"]
+sprite_frames = SubResource("SpriteFrames_mf8mb")
+
+[node name="Sword" type="AnimatedSprite2D" parent="Joel/JoelSprite"]
+position = Vector2(14, -9)
+sprite_frames = SubResource("SpriteFrames_8224p")
+offset = Vector2(-0.435, -21.265)
+
+[node name="SwordAnim" type="AnimationPlayer" parent="Joel/JoelSprite/Sword"]
+libraries = {
+"": SubResource("AnimationLibrary_h3h3n")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joel"]
+position = Vector2(-6, 0.5)
+shape = SubResource("RectangleShape2D_upen2")
+
+[node name="Hurtbox" type="Area2D" parent="Joel"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joel/Hurtbox"]
+position = Vector2(-6, -3.5)
+shape = SubResource("RectangleShape2D_qryhf")
+
+[node name="BGM" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("8_2asuu")
+volume_db = -8.0
+autoplay = true
+
+[node name="StingerHitbox" type="Area2D" parent="Joel"]
+position = Vector2(-72, -2)
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Joel/StingerHitbox"]
+position = Vector2(93, -14.0005)
+polygon = PackedVector2Array(-11.0003, -59.9999, 213, -1.00061, -12.9997, 60.0001, 17, -2.00012)
+
+[node name="StingerHitbox2" type="Area2D" parent="Joel"]
+position = Vector2(60, -28)
+rotation = -3.14159
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Joel/StingerHitbox2"]
+position = Vector2(93, -14.0005)
+polygon = PackedVector2Array(-11.0003, -59.9999, 197, -1.00061, -12.9997, 60.0001, 17, -2.00012)
+
+[node name="SlashHitbox" type="Area2D" parent="Joel"]
+position = Vector2(14, -9)
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Joel/SlashHitbox"]
+position = Vector2(37, -4)
+polygon = PackedVector2Array(-55, -63, -24, -60, -4, -48, 6, -26, 12, 0, 4, 24, -7, 44, -23, 55, -55, 60)
+
+[node name="SlashHitbox2" type="Area2D" parent="Joel"]
+position = Vector2(-21, -19)
+rotation = -3.14159
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Joel/SlashHitbox2"]
+position = Vector2(37, -4)
+polygon = PackedVector2Array(-51.0002, -62, -23.0002, -58.0001, -4, -48, 6, -26, 12, 0, 4, 24, -7.9999, 41.9999, -24.9999, 53.9999, -50.9999, 61)
+
+[node name="Pinky1" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(531, 792)
+
+[node name="Pinky2" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(658, 791)
+
+[node name="Pinky3" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(781, 791)
+
+[node name="Pinky4" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1222, 791)
+
+[node name="Pinky5" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1386, 504)
+
+[node name="Pinky6" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1646, 409)
+
+[node name="Pinky7" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(486, 502)
+
+[node name="Pinky8" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(751, 31)
+
+[node name="Pinky9" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(940, 32)
+
+[node name="Pinky10" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(286, 597)
+
+[node name="Pinky11" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1384, 275)
+
+[node name="Pinky12" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1320, 791)
+
+[node name="Pinky13" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1427, 790)
+
+[node name="Pinky14" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1532, 791)
+
+[node name="Pinky15" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1638, 793)
+
+[node name="Pinky16" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(1072, 165)
+
+[node name="Pinky17" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(537, 159)
+
+[node name="Pinky18" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(164, 145)
+
+[node name="Pinky19" parent="." instance=ExtResource("7_podgw")]
+position = Vector2(280, 145)
+
+[connection signal="body_entered" from="Stage/OffStage" to="Joel" method="_on_off_stage_body_entered"]
+[connection signal="body_entered" from="Joel/StingerHitbox" to="Joel" method="_on_stinger_hitbox_body_entered"]
+[connection signal="body_entered" from="Joel/StingerHitbox2" to="Joel" method="_on_stinger_hitbox_body_entered"]
+[connection signal="body_entered" from="Joel/SlashHitbox" to="Joel" method="_on_slash_hitbox_body_entered"]
+[connection signal="body_entered" from="Joel/SlashHitbox2" to="Joel" method="_on_slash_hitbox_body_entered"]

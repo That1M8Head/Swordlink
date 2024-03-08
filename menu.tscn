@@ -1,0 +1,330 @@
+[gd_scene load_steps=21 format=3 uid="uid://cmh48y7u3mt28"]
+
+[ext_resource type="Script" path="res://Scripts/HandleMainMenu.gd" id="1_k3gme"]
+[ext_resource type="AudioStream" uid="uid://2xua1dbv1kbj" path="res://Music/menu.mp3" id="1_ktdko"]
+[ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Textures/Touch Buttons/UpButton.png" id="2_bivmc"]
+[ext_resource type="Script" path="res://Scripts/UpdateMenuTooltips.gd" id="2_v1t8o"]
+[ext_resource type="Script" path="res://Scripts/HelpPopup.gd" id="3_tmdub"]
+[ext_resource type="Texture2D" uid="uid://bxj0q4tryyfpb" path="res://Textures/Touch Buttons/DownButton.png" id="3_xfgmy"]
+[ext_resource type="Texture2D" uid="uid://7mdkcc11lppg" path="res://Textures/Touch Buttons/OkButton.png" id="4_4eubx"]
+[ext_resource type="Script" path="res://Scripts/CloseButtonLabel.gd" id="5_88nn1"]
+[ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="6_4wvbr"]
+[ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="8_mnxak"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7t66e"]
+font_size = 105
+
+[sub_resource type="LabelSettings" id="LabelSettings_bs06y"]
+font_size = 62
+
+[sub_resource type="LabelSettings" id="LabelSettings_0yndp"]
+font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_oeasy"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_xxmgy"]
+font_size = 56
+
+[sub_resource type="Animation" id="Animation_j8ejr"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5ys4"]
+_data = {
+"fade_out": SubResource("Animation_j8ejr")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcwvm"]
+bg_color = Color(0.411765, 0.588235, 0.952941, 1)
+
+[sub_resource type="Theme" id="Theme_ac6jb"]
+default_font_size = 25
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+MarginContainer/styles/Colour = SubResource("StyleBoxFlat_pcwvm")
+
+[sub_resource type="LabelSettings" id="LabelSettings_31mw7"]
+line_spacing = 0.0
+font_size = 33
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k3gme")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.294118, 0.345098, 1)
+
+[node name="Info" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -208.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -338.0
+offset_top = -230.0
+offset_right = 338.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Swordlink"
+label_settings = SubResource("LabelSettings_7t66e")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -63.0
+offset_right = 225.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Glitchfall Chronicles"
+label_settings = SubResource("LabelSettings_bs06y")
+horizontal_alignment = 1
+
+[node name="Subsubtitle" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -441.0
+offset_top = 25.0
+offset_right = 441.0
+offset_bottom = 92.0
+grow_horizontal = 2
+text = "Public University Demo
+"
+label_settings = SubResource("LabelSettings_0yndp")
+horizontal_alignment = 1
+
+[node name="Tooltips" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -49.0
+offset_right = 187.0
+offset_bottom = -15.0
+grow_vertical = 0
+text = "Enter = Confirm"
+label_settings = SubResource("LabelSettings_oeasy")
+vertical_alignment = 2
+script = ExtResource("2_v1t8o")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ktdko")
+volume_db = -11.0
+autoplay = true
+
+[node name="MenuOptions" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -327.0
+offset_top = -520.0
+offset_right = 329.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="NewGame" type="Label" parent="MenuOptions"]
+layout_mode = 2
+text = "NEW GAME"
+label_settings = SubResource("LabelSettings_xxmgy")
+horizontal_alignment = 1
+
+[node name="Help" type="Label" parent="MenuOptions"]
+layout_mode = 2
+text = "INFO & CONTROLS"
+label_settings = SubResource("LabelSettings_xxmgy")
+horizontal_alignment = 1
+
+[node name="ExitGame" type="Label" parent="MenuOptions"]
+layout_mode = 2
+text = "EXIT GAME
+"
+label_settings = SubResource("LabelSettings_xxmgy")
+horizontal_alignment = 1
+
+[node name="Obfuscation" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Obfuscation"]
+libraries = {
+"": SubResource("AnimationLibrary_v5ys4")
+}
+autoplay = "fade_out"
+
+[node name="HelpScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ac6jb")
+color = Color(0.0941176, 0.294118, 0.345098, 1)
+script = ExtResource("3_tmdub")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HelpScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -835.0
+offset_top = -456.0
+offset_right = 835.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Info" type="Label" parent="HelpScreen/HBoxContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Welcome to the Public University Demo for Swordlink: Glitchfall Chronicles!
+
+This is a quick demo thrown together as a proof-of-concept and is not indicative of the kind of high-octane super stylish swordplay that the eventual full version of Swordlink will bring you.
+
+Swordlink: Glitchfall Chronicles and its Public University Demo are game
+projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+
+[node name="Controls" type="Label" parent="HelpScreen/HBoxContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Command List
+=============
+Sword Combo
+  - Input: {ATK}
+  - Description: To attack, repeatedly press {ATK}. This combo is essentially infinite.
+Stinger
+  - Input: {SHIFT} + {MOV} Forward + {ATK}
+  - Easy Input: {MOV} + {SPEC}
+  - Description: Thrust yourself forward with your sword. Deals damage to a wide group of enemies.
+Updraft
+  - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
+  - Easy Input: On ground, {SPEC}
+  - Description: Swing your sword upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send yourself into the air afterwards.
+Downslash
+  - Input: In air, {SHIFT} + {MOV} Back + {ATK}
+  - Easy Input: In air, {SPEC}
+  - Description: Thrust straight downwards with your sword. Useful for getting to the ground quickly."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="HelpScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -99.0
+offset_right = 228.0
+offset_bottom = -25.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 30
+text = "  Close  "
+script = ExtResource("5_88nn1")
+
+[node name="TouchButtons" type="Node2D" parent="."]
+script = ExtResource("6_4wvbr")
+
+[node name="Left" type="Node2D" parent="TouchButtons"]
+position = Vector2(70, 680)
+
+[node name="Up" type="TouchScreenButton" parent="TouchButtons/Left"]
+texture_normal = ExtResource("2_bivmc")
+action = "MenuUp"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="TouchButtons/Left"]
+position = Vector2(320, 0)
+texture_normal = ExtResource("3_xfgmy")
+action = "MenuDown"
+visibility_mode = 1
+
+[node name="Right" type="Node2D" parent="TouchButtons"]
+position = Vector2(1870, 680)
+
+[node name="Back" type="TouchScreenButton" parent="TouchButtons/Right"]
+position = Vector2(-575, 0)
+texture_normal = ExtResource("8_mnxak")
+action = "MenuBack"
+visibility_mode = 1
+
+[node name="Ok" type="TouchScreenButton" parent="TouchButtons/Right"]
+position = Vector2(-255, 0)
+texture_normal = ExtResource("4_4eubx")
+action = "MenuConfirm"
+visibility_mode = 1
+
+[connection signal="pressed" from="HelpScreen/CloseButton" to="HelpScreen" method="_on_button_pressed"]
