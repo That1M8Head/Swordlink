@@ -6,3 +6,6 @@
 
 # Android signing
 *.apk.idsig
+
+# Temporary files
+*.tmp
