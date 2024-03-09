@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ci7w0j3fy13pi"]
+[gd_scene load_steps=40 format=3 uid="uid://ci7w0j3fy13pi"]
 
 [ext_resource type="Texture2D" uid="uid://6a8llpsho646" path="res://Textures/FloorTexture.png" id="1_6l14n"]
 [ext_resource type="Script" path="res://Scripts/JoelMovements.gd" id="2_klvbf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="3_md8pn"]
 [ext_resource type="Texture2D" uid="uid://bu6co4c1bjprt" path="res://Sprites/joelsword.png" id="4_bs3jm"]
 [ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Textures/Touch Buttons/UpButton.png" id="7_2ivfp"]
+[ext_resource type="Texture2D" uid="uid://dkhr1iil10l8q" path="res://Textures/Touch Buttons/MShiftButton.png" id="7_mqqeb"]
 [ext_resource type="PackedScene" uid="uid://b4aijab17wj50" path="res://enemy_obj.tscn" id="7_podgw"]
 [ext_resource type="AudioStream" uid="uid://d374i34rldnno" path="res://Music/battle.mp3" id="8_2asuu"]
 [ext_resource type="Script" path="res://Scripts/BackgroundColour.gd" id="8_5p8up"]
@@ -385,6 +386,12 @@ visibility_mode = 1
 position = Vector2(-255, 0)
 texture_normal = ExtResource("8_61562")
 action = "Attack"
+visibility_mode = 1
+
+[node name="ModeShift" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
+position = Vector2(-575, -320)
+texture_normal = ExtResource("7_mqqeb")
+action = "ModeShift"
 visibility_mode = 1
 
 [node name="AltAttack" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]

@@ -42,7 +42,7 @@ func _process(delta):
 			if DisplayServer.is_touchscreen_available():
 				move_command = "◀/▶"
 				jump_command = "▲"
-				shift_command = "N/A"
+				shift_command = "M"
 				attack_command = "Sword"
 				special_command = "Thrust"
 				evade_command = "N/A"
@@ -57,10 +57,10 @@ func _process(delta):
 				menu_command = "Esc"
 		_:
 			move_command = "Left Stick"
-			jump_command = "Bottom Face Button"
-			shift_command = "Right Bumper or Trigger"
-			attack_command = "Top Face Button"
-			evade_command = "Right Face Button"
+			jump_command = "A"
+			shift_command = "R1/R2"
+			attack_command = "Y"
+			evade_command = "X"
 			menu_command = "Start"
 	
 	var controls = $HBoxContainer/Controls
