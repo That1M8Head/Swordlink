@@ -6,13 +6,13 @@
 [ext_resource type="Script" path="res://Scripts/UpdateDeathMessageTitle.gd" id="2_0ui8j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nfujd"]
-font_size = 70
+font_size = 105
 
 [sub_resource type="LabelSettings" id="LabelSettings_xt1fs"]
-font_size = 32
+font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_0vd8t"]
-font_size = 24
+font_size = 36
 
 [node name="DeathScreen" type="Control"]
 layout_mode = 3
@@ -39,13 +39,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -276.5
-offset_top = -117.5
-offset_right = 276.5
-offset_bottom = 117.5
+offset_left = -395.5
+offset_top = -203.5
+offset_right = 395.5
+offset_bottom = 203.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 45
 alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
