@@ -59,7 +59,7 @@ MarginContainer/styles/Colour = SubResource("StyleBoxFlat_pcwvm")
 
 [sub_resource type="LabelSettings" id="LabelSettings_31mw7"]
 line_spacing = 0.0
-font_size = 33
+font_size = 30
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -227,15 +227,12 @@ script = ExtResource("3_tmdub")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HelpScreen"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -835.0
-offset_top = -456.0
-offset_right = 835.0
-offset_bottom = 456.0
+anchor_bottom = 1.0
+offset_left = -915.0
+offset_right = 915.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
@@ -253,6 +250,7 @@ This is a quick demo thrown together as a proof-of-concept and is not indicative
 Swordlink: Glitchfall Chronicles and its Public University Demo are game
 projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
 label_settings = SubResource("LabelSettings_31mw7")
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Controls" type="Label" parent="HelpScreen/HBoxContainer"]
@@ -265,6 +263,9 @@ text = "Command List
 Sword Combo
   - Input: {ATK}
   - Description: To attack, repeatedly press {ATK}. This combo is essentially infinite.
+Evade
+  - Input: {EVADE}
+  - Perform a dash that passes through enemies. 
 Stinger
   - Input: {SHIFT} + {MOV} Forward + {ATK}
   - Easy Input: {MOV} + {SPEC}
@@ -278,6 +279,7 @@ Downslash
   - Easy Input: In air, {SPEC}
   - Description: Thrust straight downwards with your sword. Useful for getting to the ground quickly."
 label_settings = SubResource("LabelSettings_31mw7")
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="CloseButton" type="Button" parent="HelpScreen"]

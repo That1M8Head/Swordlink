@@ -45,7 +45,7 @@ func _process(delta):
 				shift_command = "M"
 				attack_command = "Sword"
 				special_command = "Thrust"
-				evade_command = "N/A"
+				evade_command = "Dash"
 				menu_command = "BACK"
 			else:
 				move_command = "←/→ or A/D"
