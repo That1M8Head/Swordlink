@@ -304,6 +304,8 @@ func deal_damage(body, damage: int, knockback: Vector2):
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 
 func damage_self(amount: int):
+	if dashing:
+		return
 	var style_rank_meter = get_node("/root/Game/CanvasLayer/HUD/Style/Meter")
 	style_duration -= style_rank_meter.max_value / 3
 	health -= amount
