@@ -1,13 +1,10 @@
 extends TextEdit
 
 var base_message: String = """rom-wack
-PC: yes SR: stuffed USP: it sure does point SSP: it also points XCPT: fell off stage TASK: rom-wack
-DR: the doctor will see you now
-AR: why would you want AR in a 2D hack-and-slash
-SF: my favourite one is SFIV
-new-rom-wack
--> Welcome to the new ROMWack! We decided to make some changes and now ROMWack is a proper command environment.
--> To return to Swordlink: Glitchfall Chronicles, type "exit" followed by the enter key.
+-> PC: yes SR: stuffed USP: it sure does point SSP: it also points XCPT: fell off stage TASK: rom-wack
+-> DR: the doctor will see you now
+-> AR: why would you want AR in a 2D hack-and-slash
+-> SF: my favourite one is SFIV
 """
 
 var shutup: bool
@@ -15,28 +12,66 @@ var shutup: bool
 func _ready():
 	text = base_message
 	call_deferred("grab_focus")
+	startup_hints()
 	reset_caret_position()
 	if Input.get_joy_name(0) != "":
 		speak_output("ROMWack will not work with your %s. Please use a keyboard." % Input.get_joy_name(0))
-	if DisplayServer.is_touchscreen_available():
-		speak_output("Your on-screen keyboard's Enter key will not work. Use the touch button at the top right instead.")
 
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
 		DisplayServer.virtual_keyboard_show(get_line(get_line_count()))
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ENTER:
+		get_viewport().set_input_as_handled()
+		handle_enter_keypress()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("Enter"):
-		if not Input.is_key_pressed(KEY_ENTER):
-			text += "\n"
-		process_command(get_line(get_line_count() - 2))
+func handle_enter_keypress():
+	var caret_at_bottom = get_caret_line() == get_line_count() - 1
+	if caret_at_bottom:
+		process_command(get_line(get_line_count() - 1), true)
+	else:
+		var line = get_line(get_caret_line())
+		reset_caret_position()
+		process_command(line, false)
 	reset_caret_position()
 
-func process_command(command: String):
+func startup_hints():
+	command_output("Welcome to ROMWack! Type some commands or type some GDScript expressions.")
+	command_output(" Type \"cmds\" for a list of built-in commands. All other input will be treated as a GDScript expression.")
+	command_output("To return to Swordlink: Glitchfall Chronicles, type \"exit\" followed by the enter key.")
+
+func process_command(command: String, linebreak: bool):
+	if linebreak:
+		text += "\n"
 	match command.to_lower():
 		"clear":
 			text = ""
+		"cmds":
+			var commands_msg = [
+				"== Useful Commands ==",
+				"clear - Clear the buffer",
+				"cmds - Display this message",
+				"exit - Return to Swordlink: Glitchfall Chronicles",
+				"rom-wack - Reset this program",
+				"shutdown - Exit the game entirely",
+				"== Fun Commands ==",
+				"ls - List fake directories",
+				"random - Output a random number",
+				"wack - Wack the ROM",
+				"== Talking to ROMWack ==",
+				"hello - Say hello to her",
+				"help - Get \"help\" from her",
+				"joel - Confirm your character's name",
+				"man - Incorrectly call her a man",
+				"me - Present yourself to her",
+				"name - Ask for her name",
+				"ping - Prompt her to say \"pong\"",
+				"run - Try to run away from her",
+				"woman - Correctly call her a woman",
+				"you - Ask who she is",
+				"=== All other inputs will be treated as GDScript. ===",
+			]
+			for cmd in commands_msg:
+				command_output(cmd)
 		"ls":
 			command_output("total 3")
 			command_output("drwxr-xr-x    2 rom-wack    rom-wack        40 Mar  7 20:21 crap")
@@ -62,14 +97,18 @@ func process_command(command: String):
 				"Did you know? This game was originally going to be called \"Guy with a Sword\".",
 				"Velocity better get at LEAST 90 marks for this.",
 				"Why do we all have to wear these ridiculous ties?",
+				"Did you know? This is practically a developer console.",
 			]
-			command_output(messages[randi_range(0, len(messages) - 1)])
+			speak_output(messages[randi_range(0, len(messages) - 1)])
 		"joel":
 			speak_output("Yes, that's you.")
 		"man":
 			speak_output("No, I'm actually a woman.")
 		"me":
-			speak_output("What about you?")
+			if OS.has_environment("USER"):
+				speak_output("You're %s, right?" % OS.get_environment("USER"))
+			else:
+				speak_output("I can't seem to find your $USER...")
 		"name":
 			speak_output("ROMWack")
 		"ping":
@@ -85,9 +124,12 @@ func process_command(command: String):
 			await(get_tree().create_timer(1.5).timeout)
 			get_tree().quit()
 		"shutup":
-			shutup = true
-		"sudo":
-			command_output("")
+			if not shutup:
+				command_output("ROMWack has been shut up.")
+				shutup = true
+			else:
+				command_output("Error: ROMWack has already been shut up.")
+				command_output("Run rom-wack to reset.")
 		"wack":
 			command_output("Wacking ROM...")
 			await(get_tree().create_timer(3).timeout)
@@ -97,18 +139,41 @@ func process_command(command: String):
 		"you":
 			speak_output("My name's ROMWack. I was named after the old Amiga debugger.")
 		_:
-			if len(command) > 127:
-				speak_output("Command too long.")
-			else:
-				command_output("Unknown command: " + command)
+			return_output(express(command))
+
+func express(command) -> String:
+	if command.begins_with("print("):
+		speak_output("print() won't work here - use command_output()")
+	if command.begins_with("speak_output("):
+		speak_output("You're not allowed to control what I say.")
+		return "Error: tried to run speak_output()"
+	if command.begins_with("return_output("):
+		speak_output("Last I checked, you weren't a return value.")
+		return "Error: tried to manually return a value"
+	var expression = Expression.new()
+	var error = expression.parse(command)
+	if error != OK:
+		return "Error: " + expression.get_error_text()
+	var result = expression.execute([], self)
+	if not expression.has_execute_failed():
+		return str(result)
+	else:
+		return "Error: " + expression.get_error_text()
 
 func command_output(output: String):
 	text += "-> " + output + "\n"
 	reset_caret_position()
 
+func return_output(output: String):
+	text += "<- " + output + "\n"
+	reset_caret_position()
+
 func speak_output(output: String):
-	if not shutup:
-		text += "ROMWack says: " + output + "\n"
+	if shutup:
+		command_output("Error: ROMWack cannot speak.")
+		command_output("Run rom-wack to reset.")
+		return
+	text += "ROMWack says: " + output + "\n"
 	reset_caret_position()
 
 func reset_caret_position():

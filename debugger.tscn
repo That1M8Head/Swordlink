@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq0cef8yqk6ci"]
+[gd_scene load_steps=4 format=3 uid="uid://dq0cef8yqk6ci"]
 
 [ext_resource type="Script" path="res://Scripts/CommandPrompt.gd" id="1_wnpmw"]
-[ext_resource type="Texture2D" uid="uid://bx60cbssehls5" path="res://Textures/Touch Buttons/EnterButton.png" id="2_w2q5f"]
-[ext_resource type="Script" path="res://Scripts/EnterButtonPos.gd" id="3_l0m1e"]
 
 [sub_resource type="SystemFont" id="SystemFont_qoy28"]
 font_names = PackedStringArray("Monospace")
@@ -40,8 +38,6 @@ grow_vertical = 2
 theme_override_fonts/font = SubResource("SystemFont_6xs4v")
 theme_override_font_sizes/font_size = 24
 context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 middle_mouse_paste_enabled = false
@@ -50,12 +46,5 @@ caret_blink = true
 caret_move_on_right_click = false
 caret_multiple = false
 script = ExtResource("1_wnpmw")
-
-[node name="EnterButton" type="TouchScreenButton" parent="ColorRect"]
-position = Vector2(1563, 80)
-texture_normal = ExtResource("2_w2q5f")
-action = "Enter"
-visibility_mode = 1
-script = ExtResource("3_l0m1e")
 
 [connection signal="text_changed" from="ColorRect/TextEdit" to="ColorRect/TextEdit" method="_on_text_changed"]

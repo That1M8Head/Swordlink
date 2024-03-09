@@ -17,7 +17,10 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
-		get_tree().change_scene_to_file("res://menu.tscn")
+		if event.position.y < get_viewport().size.y / 3:
+			get_tree().change_scene_to_file("res://debugger.tscn")
+		else:
+			get_tree().change_scene_to_file("res://menu.tscn")
 	elif event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			open_debugger()

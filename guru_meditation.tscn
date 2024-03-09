@@ -78,7 +78,7 @@ theme_override_constants/margin_bottom = 45
 
 [node name="Box" type="ColorRect" parent="Background/Error"]
 layout_mode = 2
-color = Color(1, 0, 0, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="InnerBoxMargin" type="MarginContainer" parent="Background/Error/Box"]
 layout_mode = 1
