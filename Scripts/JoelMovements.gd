@@ -281,16 +281,22 @@ func downslash_attack(flipped: bool):
 func _on_slash_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
 		var damage = randi_range(10, 25)
+		if not is_on_floor():
+			damage *= 1.5
 		deal_damage(body, damage, Vector2(damage * 15, 0))
 
 func _on_stinger_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
 		var damage = randi_range(40, 55)
+		if not is_on_floor():
+			damage *= 1.5
 		deal_damage(body, damage, Vector2(damage * 15, damage * 5))
 
 func _on_updraft_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
 		var damage = randi_range(15, 30)
+		if not is_on_floor():
+			damage *= 1.5
 		deal_damage(body, damage, Vector2(damage * 5, JUMP_VELOCITY * 0.8))
 
 func _on_downslash_hitbox_body_entered(body):
