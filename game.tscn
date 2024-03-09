@@ -374,8 +374,8 @@ passby_press = true
 action = "MoveRight"
 visibility_mode = 1
 
-[node name="ModeShift" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
-position = Vector2(70, 361)
+[node name="ModeShift" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Left"]
+position = Vector2(0, -319)
 texture_normal = ExtResource("7_mqqeb")
 action = "ModeShift"
 visibility_mode = 1
