@@ -2,6 +2,7 @@ extends ColorRect
 
 func _input(event):
 	if event.is_action_pressed("MenuBack"):
+		$MenuBack.play()
 		visible = false
 
 func _process(delta):

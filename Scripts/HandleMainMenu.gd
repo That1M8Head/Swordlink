@@ -21,9 +21,11 @@ func select_option(index):
 	$MenuOptions.get_children()[selected_option_index].modulate = Color(0, .5, 1)  # Highlight selected option
 
 func select_next_option():
+	$MenuMove.play()
 	select_option((selected_option_index + 1) % $MenuOptions.get_children().size())
 
 func select_previous_option():
+	$MenuMove.play()
 	select_option((selected_option_index - 1 + $MenuOptions.get_children().size()) % $MenuOptions.get_children().size())
 
 func execute_selected_option():
@@ -40,6 +42,7 @@ func start_new_game():
 	get_tree().change_scene_to_file("res://game.tscn")
 
 func open_options_menu():
+	$MenuSelect.play()
 	$HelpScreen.visible = true
 
 func exit_game():

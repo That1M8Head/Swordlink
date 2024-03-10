@@ -148,10 +148,7 @@ func _physics_process(delta):
 		var direction = Input.get_axis("MoveLeft", "MoveRight")
 		if direction:
 			if not dashing and Input.is_action_just_pressed("Evade"):
-				dashing = true
-				modulate = Color(1, 1, 1, 0.5)
-				set_collision_mask_value(2, false)
-				velocity.x = direction * SPEED * 2
+				do_evasion()
 			elif not dashing:
 				if is_on_floor():
 					velocity.x = direction * move_speed
@@ -204,11 +201,22 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if dashing:
-		await(get_tree().create_timer(0.3).timeout)
-		set_collision_mask_value(2, true)
-		modulate = "#ffffffff"
-		dashing = false
-		move_and_slide()
+		reset_evasion_flags()
+
+func do_evasion():
+	var direction = Input.get_axis("MoveLeft", "MoveRight")
+	dashing = true
+	modulate = Color(1, 1, 1, 0.5)
+	$DodgeSound.play()
+	set_collision_mask_value(2, false)
+	velocity.x = direction * SPEED * 2
+
+func reset_evasion_flags():
+	await(get_tree().create_timer(0.3).timeout)
+	set_collision_mask_value(2, true)
+	modulate = "#ffffffff"
+	dashing = false
+	move_and_slide()
 	
 func do_directed_sword_slash():
 	if $JoelSprite.flip_h:

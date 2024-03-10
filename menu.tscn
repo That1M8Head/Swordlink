@@ -1,12 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmh48y7u3mt28"]
+[gd_scene load_steps=24 format=3 uid="uid://cmh48y7u3mt28"]
 
 [ext_resource type="Script" path="res://Scripts/HandleMainMenu.gd" id="1_k3gme"]
 [ext_resource type="AudioStream" uid="uid://2xua1dbv1kbj" path="res://Music/menu.mp3" id="1_ktdko"]
 [ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Textures/Touch Buttons/UpButton.png" id="2_bivmc"]
 [ext_resource type="Script" path="res://Scripts/UpdateMenuTooltips.gd" id="2_v1t8o"]
+[ext_resource type="AudioStream" uid="uid://dya48y5vbjyl6" path="res://Sounds/Move.wav" id="3_klbu0"]
 [ext_resource type="Script" path="res://Scripts/HelpPopup.gd" id="3_tmdub"]
 [ext_resource type="Texture2D" uid="uid://bxj0q4tryyfpb" path="res://Textures/Touch Buttons/DownButton.png" id="3_xfgmy"]
 [ext_resource type="Texture2D" uid="uid://7mdkcc11lppg" path="res://Textures/Touch Buttons/OkButton.png" id="4_4eubx"]
+[ext_resource type="AudioStream" uid="uid://0e7tulo1bnel" path="res://Sounds/Return.wav" id="4_pwklc"]
+[ext_resource type="AudioStream" uid="uid://00u7u4wd00fr" path="res://Sounds/Select.wav" id="5_0jvob"]
 [ext_resource type="Script" path="res://Scripts/CloseButtonLabel.gd" id="5_88nn1"]
 [ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="6_4wvbr"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="8_mnxak"]
@@ -158,9 +161,17 @@ label_settings = SubResource("LabelSettings_oeasy")
 vertical_alignment = 2
 script = ExtResource("2_v1t8o")
 
+[node name="MenuMove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_klbu0")
+volume_db = -10.0
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0jvob")
+volume_db = -10.0
+
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ktdko")
-volume_db = -11.0
+volume_db = 12.0
 autoplay = true
 
 [node name="MenuOptions" type="VBoxContainer" parent="."]
@@ -224,6 +235,10 @@ grow_vertical = 2
 theme = SubResource("Theme_ac6jb")
 color = Color(0.0941176, 0.294118, 0.345098, 1)
 script = ExtResource("3_tmdub")
+
+[node name="MenuBack" type="AudioStreamPlayer" parent="HelpScreen"]
+stream = ExtResource("4_pwklc")
+volume_db = -10.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HelpScreen"]
 layout_mode = 1
