@@ -327,7 +327,6 @@ func deal_damage(body, damage: int, knockback: Vector2):
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 
 func damage_self(amount: int):
-	print(amount)
 	if dashing:
 		return
 	health -= amount
