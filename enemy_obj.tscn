@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4aijab17wj50"]
+[gd_scene load_steps=21 format=3 uid="uid://b4aijab17wj50"]
 
 [ext_resource type="Texture2D" uid="uid://ckcfwheygjkwm" path="res://Sprites/pinky.png" id="1_1dcm3"]
 [ext_resource type="Texture2D" uid="uid://dk8gpmeyhreoj" path="res://Sprites/pinky_attack1.png" id="1_35di4"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cxqhfig3nnr1b" path="res://Sprites/pinky_attack3.png" id="3_hcpfx"]
 [ext_resource type="Texture2D" uid="uid://mwm15qiqka46" path="res://Sprites/pinky_run1.png" id="6_15kyq"]
 [ext_resource type="Texture2D" uid="uid://l3ioear4uxrm" path="res://Sprites/pinky_run2.png" id="7_x0yje"]
+[ext_resource type="AudioStream" uid="uid://djncpbridv4jj" path="res://Sounds/Pinky/DSSGTSIT.wav" id="9_pg13e"]
+[ext_resource type="AudioStream" uid="uid://dn4bdw1yn6mee" path="res://Sounds/Pinky/DSSGTATK.wav" id="10_2p24u"]
+[ext_resource type="AudioStream" uid="uid://bj621rjsqtmyu" path="res://Sounds/Pinky/DSSGTDTH.wav" id="11_gvrl6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bagne"]
 font_size = 32
@@ -25,18 +28,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.7, 0.7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_688dd"]
@@ -83,8 +74,38 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsrqf"]
+bg_color = Color(1, 0.870588, 0.85098, 0.192157)
+skew = Vector2(-0.4, 0)
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mpmc"]
+bg_color = Color(0.913725, 0, 0.301961, 1)
+skew = Vector2(-0.4, 0)
+corner_detail = 20
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gltal"]
 size = Vector2(60, 54)
+
+[sub_resource type="Animation" id="Animation_6b688"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jiwv8"]
+_data = {
+"death": SubResource("Animation_6b688")
+}
 
 [node name="EnemyObj" type="Node2D"]
 
@@ -101,12 +122,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -55.0
-offset_top = -72.0
+offset_top = -85.0
 offset_right = 55.0
-offset_bottom = -27.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(54.96, 37.14)
+pivot_offset = Vector2(55, 10)
 text = "-0"
 label_settings = SubResource("LabelSettings_bagne")
 horizontal_alignment = 1
@@ -120,6 +141,26 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pinky"]
 sprite_frames = SubResource("SpriteFrames_74cdl")
 animation = &"idle"
+
+[node name="HealthBar" type="ProgressBar" parent="Pinky"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -40.0
+offset_right = 37.0
+offset_bottom = -34.0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hsrqf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7mpmc")
+rounded = true
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pinky/HealthBar"]
+libraries = {
+"": SubResource("AnimationLibrary_688dd")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pinky"]
 shape = SubResource("RectangleShape2D_gltal")
@@ -135,5 +176,22 @@ collide_with_areas = true
 
 [node name="FlipRaycast" type="RayCast2D" parent="Pinky"]
 target_position = Vector2(512, 0)
+
+[node name="DeathAnim" type="AnimationPlayer" parent="Pinky"]
+libraries = {
+"": SubResource("AnimationLibrary_jiwv8")
+}
+
+[node name="SeeSound" type="AudioStreamPlayer2D" parent="Pinky"]
+stream = ExtResource("9_pg13e")
+volume_db = 2.0
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Pinky"]
+stream = ExtResource("10_2p24u")
+volume_db = 2.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Pinky"]
+stream = ExtResource("11_gvrl6")
+volume_db = 2.0
 
 [connection signal="screen_exited" from="Pinky/VisibleOnScreenNotifier2D" to="Pinky" method="_on_visible_on_screen_notifier_2d_screen_exited"]

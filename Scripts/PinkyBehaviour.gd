@@ -22,26 +22,37 @@ func _ready():
 
 	player = get_node("/root/Game/Joel")
 	player_hbox = get_node("/root/Game/Joel/Hurtbox")
+	
+func _process(delta):
+	$HealthBar.value = health
 
 func _physics_process(delta):
+	if health <= 0:
+		return
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	if proximity_raycast.is_colliding() and (proximity_raycast.get_collider() == player or proximity_raycast.get_collider() == player_hbox):
 		anims.play("attack")
 	elif attack_raycast.is_colliding() and (attack_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+		if anims.animation == "idle":
+			$SeeSound.play()
 		anims.play("running")
 		velocity.x = -speed
 	elif flip_raycast.is_colliding() and (flip_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+		if anims.animation == "idle":
+			$SeeSound.play()
 		anims.play("running")
 		velocity.x = speed
 	else:
 		velocity.x = 0
 		anims.play("idle")
 		
-	if proximity_raycast.is_colliding() and anims.animation == "attack":
+	if (proximity_raycast.is_colliding() or flip_raycast.is_colliding()) and anims.animation == "attack":
 		current_time += delta
 		if current_time > total_time:
+			$AttackSound.play()
 			player.damage_self(randi_range(5, 15))
 			current_time = 0
 
@@ -65,15 +76,20 @@ func _physics_process(delta):
 	
 func take_damage(damage_amount: int, knockback_v: Vector2):
 	$DamageNumber/AnimationPlayer.stop()
+	$HealthBar/AnimationPlayer.stop()
 	anims.stop()
 	anims.play("idle")
 	$DamageNumber.text = str(-damage_amount)
 	$DamageNumber/AnimationPlayer.play("display_then_fade_out")
-	knockback += knockback_v
-	await(get_tree().create_timer(3).timeout)
+	$HealthBar/AnimationPlayer.play("display_then_fade_out")
 	health -= damage_amount
+	knockback += knockback_v
 	if health <= 0:
 		die()
 
 func die():
+	set_collision_layer_value(2, false)
+	$DeathAnim.play("death")
+	$DeathSound.play()
+	await($DeathAnim.animation_finished)
 	queue_free()

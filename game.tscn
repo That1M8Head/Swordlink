@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ci7w0j3fy13pi"]
+[gd_scene load_steps=47 format=3 uid="uid://ci7w0j3fy13pi"]
 
 [ext_resource type="Texture2D" uid="uid://6a8llpsho646" path="res://Textures/FloorTexture.png" id="1_6l14n"]
 [ext_resource type="Script" path="res://Scripts/JoelMovements.gd" id="2_klvbf"]
@@ -18,7 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://c43nueh1020nw" path="res://Textures/Touch Buttons/LeftButton.png" id="11_f5sex"]
 [ext_resource type="Texture2D" uid="uid://olk4nwvalbsp" path="res://Textures/Touch Buttons/RightButton.png" id="12_og731"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="13_lmq0m"]
-[ext_resource type="AudioStream" uid="uid://cgfwwxeumh0ho" path="res://Sounds/Dodge.wav" id="18_5cpx0"]
+[ext_resource type="AudioStream" uid="uid://cgfwwxeumh0ho" path="res://Sounds/Joel/Dodge.wav" id="18_5cpx0"]
+[ext_resource type="AudioStream" uid="uid://dh1p2rjotv8pc" path="res://Sounds/Joel/Jump.wav" id="19_ahekc"]
+[ext_resource type="AudioStream" uid="uid://cwfcyo58fs3yp" path="res://Sounds/Joel/SwordSwing.wav" id="20_51qd3"]
+[ext_resource type="AudioStream" uid="uid://dvs8l67xlp7c7" path="res://Sounds/Joel/SwordHit.wav" id="21_7m2e3"]
+[ext_resource type="AudioStream" uid="uid://bcckgcsfcfpbr" path="res://Sounds/Joel/Stinger.wav" id="21_tujpg"]
+[ext_resource type="AudioStream" uid="uid://dprkjmfu571pe" path="res://Sounds/Joel/Updraft.wav" id="22_bfx0c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4h43v"]
 bg_color = Color(0.705882, 0.839216, 1, 1)
@@ -530,6 +535,26 @@ autoplay = true
 [node name="DodgeSound" type="AudioStreamPlayer" parent="Joel"]
 stream = ExtResource("18_5cpx0")
 volume_db = -8.0
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("19_ahekc")
+volume_db = -7.0
+
+[node name="SwordSound" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("20_51qd3")
+volume_db = -6.0
+
+[node name="StingerSound" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("21_tujpg")
+volume_db = -6.0
+
+[node name="UpdraftSound" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("22_bfx0c")
+volume_db = -6.0
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Joel"]
+stream = ExtResource("21_7m2e3")
+volume_db = -6.0
 
 [node name="UpdraftHitbox" type="Area2D" parent="Joel"]
 visible = false

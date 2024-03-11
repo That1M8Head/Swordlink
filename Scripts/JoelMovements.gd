@@ -141,6 +141,7 @@ func _physics_process(delta):
 	var updraft = sword_animation.current_animation.contains("updraft")
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and not updraft:
+		$JumpSound.play()
 		velocity.y = JUMP_VELOCITY
 
 	var blocking_attack = stinger or updraft
@@ -227,6 +228,7 @@ func do_directed_sword_slash():
 func do_sword_slash(left: bool):
 	var sword_animation: AnimationPlayer = $JoelSprite/Sword/SwordAnim
 	sword_animation.stop()
+	$SwordSound.play()
 	if left:
 		sword_animation.play("sword_slash_left")
 		hitbox_left.monitoring = true
@@ -239,6 +241,7 @@ func do_sword_slash(left: bool):
 
 func stinger_attack(flipped: bool):
 	$JoelSprite/Sword/SwordAnim.stop()
+	$StingerSound.play()
 	if flipped:
 		velocity.x = -(SPEED * 2)
 		$StingerHitbox2.monitoring = true
@@ -253,6 +256,7 @@ func stinger_attack(flipped: bool):
 
 func updraft_attack(flipped: bool):
 	$JoelSprite/Sword/SwordAnim.stop()
+	$UpdraftSound.play()
 	if flipped:
 		$JoelSprite/Sword/SwordAnim.play("updraft")
 	else:
@@ -273,6 +277,7 @@ func updraft_attack(flipped: bool):
 
 func downslash_attack(flipped: bool):
 	$JoelSprite/Sword/SwordAnim.stop()
+	$UpdraftSound.play()
 	if flipped:
 		$JoelSprite/Sword/SwordAnim.play("sword_slash")
 	else:
@@ -313,9 +318,11 @@ func _on_downslash_hitbox_body_entered(body):
 		deal_damage(body, damage, Vector2(0, -JUMP_VELOCITY))
 
 func deal_damage(body, damage: int, knockback: Vector2):
-	style_duration += damage * 48 if body.is_on_floor() else damage * 24
+	$HitSound.play()
 	if damage > body.health:
-		health += damage / 2
+		var health_reward = damage / 2
+		health += health_reward * (style_rank + 1)
+	style_duration += damage * 48 if body.is_on_floor() else damage * 24
 	var flip = -1 if $JoelSprite.flip_h else 1
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 
