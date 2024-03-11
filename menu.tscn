@@ -269,8 +269,7 @@ text = "Welcome to the Public University Demo for Swordlink: Glitchfall Chronicl
 
 This is a quick demo thrown together as a proof-of-concept and is not indicative of the kind of high-octane super stylish swordplay that the eventual full version of Swordlink will bring you.
 
-Swordlink: Glitchfall Chronicles and its Public University Demo are game
-projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
+Swordlink: Glitchfall Chronicles and its Public University Demo are game projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
 label_settings = SubResource("LabelSettings_31mw7")
 vertical_alignment = 1
 autowrap_mode = 3
@@ -282,21 +281,21 @@ size_flags_horizontal = 4
 size_flags_vertical = 1
 text = "Command List
 =============
-Sword Combo
+Sword Combo -
   - Input: {ATK}
   - Description: To attack with the Circuit Saber, repeatedly press {ATK}. This combo is essentially infinite.
-Evade
+Evade -
   - Input: {MOV} + {EVADE}
-  - Make Joel perform a dash that passes through enemies. 
-Stinger
+  - Make Joel perform an invincible dash that turns him translucent and passes through enemies.
+Stinger -
   - Input: {SHIFT} + {MOV} Forward + {ATK}
   - Easy Input: {MOV} + {SPEC}
   - Description: Thrust Joel forward with the Circuit Saber. Deals damage to a wide group of enemies.
-Updraft
+Updraft -
   - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
   - Easy Input: On ground, {SPEC}
   - Description: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send Joel into the air afterwards.
-Downslash
+Downslash -
   - Input: In air, {SHIFT} + {MOV} Back + {ATK}
   - Easy Input: In air, {SPEC}
   - Description: Thrust straight downwards with the Circuit Saber. Useful for getting to the ground quickly."
