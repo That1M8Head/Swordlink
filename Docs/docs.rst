@@ -80,9 +80,8 @@ To understand the following, you'll need to read these controls first.
 Keyboard Only
 ^^^^^^^^^^^^^
 
-* **Move** - Left and Right arrow keys
-  * **Left** - Left arrow key
-  * **Right** - Right arrow key
+* **Left** - Left arrow key
+* **Right** - Right arrow key
 * **Jump** - Space key
 * **Attack** - Z key
 * **Special** - X key
@@ -93,9 +92,8 @@ Keyboard Only
 Keyboard and Mouse
 ^^^^^^^^^^^^^^^^^^
 
-* **Move** - A and D keys
-  * **Left** - A key
-  * **Right** - D key
+* **Left** - A key
+* **Right** - D key
 * **Jump** - Space key
 * **Attack** - Left mouse button
 * **Special** - Right mouse button
@@ -106,9 +104,8 @@ Keyboard and Mouse
 Controller (Xbox)
 ^^^^^^^^^^^^^^^^^
 
-* **Move** - Left stick or D-Pad left/right
-  * **Left** - Left stick or D-Pad left
-  * **Right** - Left stick or D-Pad right
+* **Left** - Left stick or D-Pad left
+* **Right** - Left stick or D-Pad right
 * **Jump** - A button
 * **Attack** - Y button 
 * **Special** - X button
@@ -123,9 +120,8 @@ Touch controls are special in that they're represented by rounded squares
 with either text or glyphs. So, these will be descriptions based on their
 appearances.
 
-* **Move** - Left or right arrows
-  * **Left** - Left arrow
-  * **Right** - Right arrow
+* **Left** - Left arrow
+* **Right** - Right arrow
 * **Jump** - Up arrow
 * **Attack** - Sword tilted 90deg to the right
 * **Special** - Sword pointed right with arrows behind it
