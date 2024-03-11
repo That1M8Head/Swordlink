@@ -123,6 +123,7 @@ func _process(delta):
 	if style_duration <= 0 and style_rank > StyleRank.None:
 		style_duration = style_rank_meter.max_value - 1
 		style_rank -= 1
+	health = clamp(health, 0, health_bar.max_value)
 	if health_bar.value <= 0:
 		get_tree().change_scene_to_file("res://death_screen.tscn")
 	if Input.is_action_just_pressed("Menu"):
