@@ -270,10 +270,9 @@ func updraft_attack(flipped: bool):
 	else:
 		$UpdraftHitbox.monitoring = true
 	move_and_slide()
-	await(get_tree().create_timer(0.4).timeout)
+	await(get_tree().create_timer(0.1).timeout)
 	$UpdraftHitbox.monitoring = false
 	$UpdraftHitbox2.monitoring = false
-	await(get_tree().create_timer(0.6).timeout)
 
 func downslash_attack(flipped: bool):
 	$JoelSprite/Sword/SwordAnim.stop()
@@ -327,11 +326,12 @@ func deal_damage(body, damage: int, knockback: Vector2):
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 
 func damage_self(amount: int):
+	print(amount)
 	if dashing:
 		return
+	health -= amount
 	var style_rank_meter = get_node("/root/Game/CanvasLayer/HUD/Style/Meter")
 	style_duration -= style_rank_meter.max_value / 3
-	health -= amount
 
 func _on_off_stage_body_entered(body):
 	call_deferred("error_message")
