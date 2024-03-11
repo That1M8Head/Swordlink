@@ -70,11 +70,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
+theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
 [node name="Page1" type="Control" parent="HelpScreen/Pages"]
-visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page1"]
@@ -85,12 +84,17 @@ offset_bottom = 118.0
 grow_horizontal = 2
 text = "About"
 label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
 
 [node name="About" type="Label" parent="HelpScreen/Pages/Page1"]
 layout_mode = 1
-offset_top = 143.0
-offset_right = 1568.0
-offset_bottom = 689.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 text = "Welcome to the Public University Demo for Swordlink: Glitchfall Chronicles!
@@ -102,7 +106,6 @@ label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 
 [node name="Page2" type="Control" parent="HelpScreen/Pages"]
-visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page2"]
@@ -113,25 +116,31 @@ offset_bottom = 118.0
 grow_horizontal = 2
 text = "Basic Controls"
 label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
 
 [node name="BasicControls" type="Label" parent="HelpScreen/Pages/Page2"]
 layout_mode = 1
-offset_top = 143.0
-offset_right = 1916.0
-offset_bottom = 583.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 text = "Sword Combos: To perform combos with the Circuit Saber, repeatedly press {ATK}. This combo is essentially infinite.
 
 Evade: Press {EVADE} to make Joel perform an invincible dash that turns him translucent and passes through enemies.
 
-Mode-Shift: Press and hold {SHIFT} to enter Mode-Shift. This lets Joel access special moves and slows down his movement."
+Mode-Shift: Press and hold {SHIFT} to enter Mode-Shift. This lets Joel access Special Attacks and slows down his movement.
+
+Special Attack: Press {SPEC} to easily access Special Attacks without having to grapple with Mode-Shift."
 label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 script = ExtResource("2_hdp2q")
 
 [node name="Page3" type="Control" parent="HelpScreen/Pages"]
-visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page3"]
@@ -142,25 +151,30 @@ offset_bottom = 118.0
 grow_horizontal = 2
 text = "Special Attacks"
 label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
 
 [node name="SpecialAttacks" type="Label" parent="HelpScreen/Pages/Page3"]
 layout_mode = 1
-offset_top = 143.0
-offset_right = 1918.0
-offset_bottom = 858.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 text = "Stinger: Thrust Joel forward with the Circuit Saber. Deals damage to a wide group of enemies.
-  - Input: {SHIFT} + {MOV} Forward + {ATK}
-  - Easy Input: {MOV} + {SPEC}
+  - Input: Hold {SHIFT} and {MOV} forward, and press {ATK}
+  - Easy Input: Hold {MOV} left or right, and press {SPEC}
 
-Updraft: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send Joel into the air afterwards.
-  - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
-  - Easy Input: On ground, {SPEC}
+Updraft: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to have Joel be sent upwards too.
+  - Input: While Joel is on the ground, hold {SHIFT} and {MOV} backwards, and press {ATK}
+  - Easy Input: While Joel is on the ground, press {SPEC}
 
 Downslash: Thrust straight downwards with the Circuit Saber. Useful for getting Joel down to the ground quickly.
-  - Input: In air, {SHIFT} + {MOV} Back + {ATK}
-  - Easy Input: In air, {SPEC}"
+  - Input: While Joel is in the air, hold {SHIFT} and {MOV} backwards, and press {ATK}
+  - Easy Input: While Joel is in the air, press {SPEC}"
 label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 script = ExtResource("2_hdp2q")
