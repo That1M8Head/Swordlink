@@ -118,6 +118,7 @@ func _process(delta):
 	if style_duration >= style_rank_meter.max_value and style_rank < StyleRank.S:
 		style_duration = 500
 		style_rank += 1
+		style_rank_anim.stop()
 		style_rank_anim.play("fade_in")
 	style_duration -= 2 * (style_rank + 1)
 	if style_duration <= 0 and style_rank > StyleRank.None:
