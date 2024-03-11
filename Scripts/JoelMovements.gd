@@ -308,7 +308,7 @@ func _on_stinger_hitbox_body_entered(body):
 
 func _on_updraft_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
-		var damage = randi_range(15, 30)
+		var damage = randi_range(5, 15)
 		if not is_on_floor():
 			damage *= 1.5
 		deal_damage(body, damage, Vector2(damage * 5, JUMP_VELOCITY * 0.8))
