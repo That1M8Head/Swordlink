@@ -1,0 +1,240 @@
+[gd_scene load_steps=17 format=3 uid="uid://cv7kxv2iygv7t"]
+
+[ext_resource type="Script" path="res://Scripts/ControlsReplacePlaceholders.gd" id="2_hdp2q"]
+[ext_resource type="AudioStream" uid="uid://dya48y5vbjyl6" path="res://Sounds/Menu/Move.wav" id="3_ed1pk"]
+[ext_resource type="AudioStream" uid="uid://00u7u4wd00fr" path="res://Sounds/Menu/Select.wav" id="4_31vsm"]
+[ext_resource type="Script" path="res://Scripts/HelpPopup.gd" id="6_flsi2"]
+[ext_resource type="AudioStream" uid="uid://dx02320202kh1" path="res://Music/help.mp3" id="6_o7s41"]
+[ext_resource type="AudioStream" uid="uid://0e7tulo1bnel" path="res://Sounds/Menu/Return.wav" id="7_0vhv8"]
+[ext_resource type="Script" path="res://Scripts/CloseButtonLabel.gd" id="8_f2a3f"]
+[ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="10_twxxe"]
+[ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Textures/Touch Buttons/UpButton.png" id="11_y6wix"]
+[ext_resource type="Texture2D" uid="uid://bxj0q4tryyfpb" path="res://Textures/Touch Buttons/DownButton.png" id="12_theds"]
+[ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="13_abhds"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcwvm"]
+bg_color = Color(0.411765, 0.588235, 0.952941, 1)
+
+[sub_resource type="Theme" id="Theme_ac6jb"]
+default_font_size = 25
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+MarginContainer/styles/Colour = SubResource("StyleBoxFlat_pcwvm")
+
+[sub_resource type="LabelSettings" id="LabelSettings_nendp"]
+font_size = 86
+
+[sub_resource type="LabelSettings" id="LabelSettings_31mw7"]
+line_spacing = 0.0
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_cigg2"]
+font_size = 36
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HelpScreen" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -4.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ac6jb")
+color = Color(0.0941176, 0.294118, 0.345098, 1)
+script = ExtResource("6_flsi2")
+
+[node name="Pages" type="MarginContainer" parent="HelpScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Page1" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page1"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
+text = "About"
+label_settings = SubResource("LabelSettings_nendp")
+
+[node name="About" type="Label" parent="HelpScreen/Pages/Page1"]
+layout_mode = 1
+offset_top = 143.0
+offset_right = 1568.0
+offset_bottom = 689.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Welcome to the Public University Demo for Swordlink: Glitchfall Chronicles!
+
+This is a quick demo thrown together as a proof-of-concept and is not indicative of the kind of high-octane super stylish swordplay that the eventual full version of Swordlink will bring you.
+
+Swordlink: Glitchfall Chronicles and its Public University Demo are game projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+
+[node name="Page2" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
+text = "Basic Controls"
+label_settings = SubResource("LabelSettings_nendp")
+
+[node name="BasicControls" type="Label" parent="HelpScreen/Pages/Page2"]
+layout_mode = 1
+offset_top = 143.0
+offset_right = 1916.0
+offset_bottom = 583.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Sword Combos: To perform combos with the Circuit Saber, repeatedly press {ATK}. This combo is essentially infinite.
+
+Evade: Press {EVADE} to make Joel perform an invincible dash that turns him translucent and passes through enemies.
+
+Mode-Shift: Press and hold {SHIFT} to enter Mode-Shift. This lets Joel access special moves and slows down his movement."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+script = ExtResource("2_hdp2q")
+
+[node name="Page3" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
+text = "Special Attacks"
+label_settings = SubResource("LabelSettings_nendp")
+
+[node name="SpecialAttacks" type="Label" parent="HelpScreen/Pages/Page3"]
+layout_mode = 1
+offset_top = 143.0
+offset_right = 1918.0
+offset_bottom = 858.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Stinger: Thrust Joel forward with the Circuit Saber. Deals damage to a wide group of enemies.
+  - Input: {SHIFT} + {MOV} Forward + {ATK}
+  - Easy Input: {MOV} + {SPEC}
+
+Updraft: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send Joel into the air afterwards.
+  - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
+  - Easy Input: On ground, {SPEC}
+
+Downslash: Thrust straight downwards with the Circuit Saber. Useful for getting Joel down to the ground quickly.
+  - Input: In air, {SHIFT} + {MOV} Back + {ATK}
+  - Easy Input: In air, {SPEC}"
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+script = ExtResource("2_hdp2q")
+
+[node name="CloseButton" type="Button" parent="HelpScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -99.0
+offset_right = 228.0
+offset_bottom = -25.0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 30
+text = "  Back to Menu  "
+script = ExtResource("8_f2a3f")
+
+[node name="PageDisplay" type="Label" parent="HelpScreen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -87.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Page X"
+label_settings = SubResource("LabelSettings_cigg2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuBack" type="AudioStreamPlayer" parent="HelpScreen"]
+stream = ExtResource("7_0vhv8")
+volume_db = -10.0
+
+[node name="MenuMove" type="AudioStreamPlayer" parent="HelpScreen"]
+stream = ExtResource("3_ed1pk")
+volume_db = -10.0
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="HelpScreen"]
+stream = ExtResource("4_31vsm")
+volume_db = -10.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_o7s41")
+autoplay = true
+
+[node name="TouchButtons" type="Node2D" parent="."]
+script = ExtResource("10_twxxe")
+
+[node name="Left" type="Node2D" parent="TouchButtons"]
+position = Vector2(70, 680)
+
+[node name="Up" type="TouchScreenButton" parent="TouchButtons/Left"]
+texture_normal = ExtResource("11_y6wix")
+action = "MenuUp"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="TouchButtons/Left"]
+position = Vector2(320, 0)
+texture_normal = ExtResource("12_theds")
+action = "MenuDown"
+visibility_mode = 1
+
+[node name="Right" type="Node2D" parent="TouchButtons"]
+position = Vector2(1870, 680)
+
+[node name="Back" type="TouchScreenButton" parent="TouchButtons/Right"]
+position = Vector2(-255, 0)
+texture_normal = ExtResource("13_abhds")
+action = "MenuBack"
+visibility_mode = 1
+
+[connection signal="pressed" from="HelpScreen/CloseButton" to="HelpScreen" method="_on_button_pressed"]

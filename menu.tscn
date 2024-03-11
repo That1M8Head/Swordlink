@@ -1,16 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmh48y7u3mt28"]
+[gd_scene load_steps=21 format=3 uid="uid://cmh48y7u3mt28"]
 
 [ext_resource type="Script" path="res://Scripts/HandleMainMenu.gd" id="1_k3gme"]
 [ext_resource type="AudioStream" uid="uid://2xua1dbv1kbj" path="res://Music/menu.mp3" id="1_ktdko"]
 [ext_resource type="Texture2D" uid="uid://blf0wdx7crwu4" path="res://Textures/Touch Buttons/UpButton.png" id="2_bivmc"]
 [ext_resource type="Script" path="res://Scripts/UpdateMenuTooltips.gd" id="2_v1t8o"]
 [ext_resource type="AudioStream" uid="uid://dya48y5vbjyl6" path="res://Sounds/Menu/Move.wav" id="3_klbu0"]
-[ext_resource type="Script" path="res://Scripts/HelpPopup.gd" id="3_tmdub"]
 [ext_resource type="Texture2D" uid="uid://bxj0q4tryyfpb" path="res://Textures/Touch Buttons/DownButton.png" id="3_xfgmy"]
 [ext_resource type="Texture2D" uid="uid://7mdkcc11lppg" path="res://Textures/Touch Buttons/OkButton.png" id="4_4eubx"]
 [ext_resource type="AudioStream" uid="uid://0e7tulo1bnel" path="res://Sounds/Menu/Return.wav" id="4_pwklc"]
 [ext_resource type="AudioStream" uid="uid://00u7u4wd00fr" path="res://Sounds/Menu/Select.wav" id="5_0jvob"]
-[ext_resource type="Script" path="res://Scripts/CloseButtonLabel.gd" id="5_88nn1"]
 [ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="6_4wvbr"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="8_mnxak"]
 [ext_resource type="Script" path="res://Scripts/ExitPopup.gd" id="9_njvhw"]
@@ -50,21 +48,6 @@ _data = {
 "fade_out": SubResource("Animation_j8ejr")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcwvm"]
-bg_color = Color(0.411765, 0.588235, 0.952941, 1)
-
-[sub_resource type="Theme" id="Theme_ac6jb"]
-default_font_size = 25
-MarginContainer/constants/margin_bottom = 0
-MarginContainer/constants/margin_left = 0
-MarginContainer/constants/margin_right = 0
-MarginContainer/constants/margin_top = 0
-MarginContainer/styles/Colour = SubResource("StyleBoxFlat_pcwvm")
-
-[sub_resource type="LabelSettings" id="LabelSettings_31mw7"]
-line_spacing = 0.0
-font_size = 30
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcp5a"]
 bg_color = Color(0.101961, 0.305882, 0.360784, 1)
 shadow_color = Color(0, 0, 0, 0.211765)
@@ -89,6 +72,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -4.0
+offset_right = -2.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.294118, 0.345098, 1)
@@ -168,6 +155,10 @@ label_settings = SubResource("LabelSettings_oeasy")
 vertical_alignment = 2
 script = ExtResource("2_v1t8o")
 
+[node name="MenuBack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pwklc")
+volume_db = -10.0
+
 [node name="MenuMove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_klbu0")
 volume_db = -10.0
@@ -230,93 +221,6 @@ libraries = {
 "": SubResource("AnimationLibrary_v5ys4")
 }
 autoplay = "fade_out"
-
-[node name="HelpScreen" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_ac6jb")
-color = Color(0.0941176, 0.294118, 0.345098, 1)
-script = ExtResource("3_tmdub")
-
-[node name="MenuBack" type="AudioStreamPlayer" parent="HelpScreen"]
-stream = ExtResource("4_pwklc")
-volume_db = -10.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HelpScreen"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -915.0
-offset_right = 915.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Info" type="Label" parent="HelpScreen/HBoxContainer"]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-text = "Welcome to the Public University Demo for Swordlink: Glitchfall Chronicles!
-
-This is a quick demo thrown together as a proof-of-concept and is not indicative of the kind of high-octane super stylish swordplay that the eventual full version of Swordlink will bring you.
-
-Swordlink: Glitchfall Chronicles and its Public University Demo are game projects by Arsalan \"Velocity\" Kazmi, built atop the Godot Engine."
-label_settings = SubResource("LabelSettings_31mw7")
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Controls" type="Label" parent="HelpScreen/HBoxContainer"]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-text = "Command List
-=============
-Sword Combo -
-  - Input: {ATK}
-  - Description: To attack with the Circuit Saber, repeatedly press {ATK}. This combo is essentially infinite.
-Evade -
-  - Input: {MOV} + {EVADE}
-  - Make Joel perform an invincible dash that turns him translucent and passes through enemies.
-Stinger -
-  - Input: {SHIFT} + {MOV} Forward + {ATK}
-  - Easy Input: {MOV} + {SPEC}
-  - Description: Thrust Joel forward with the Circuit Saber. Deals damage to a wide group of enemies.
-Updraft -
-  - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
-  - Easy Input: On ground, {SPEC}
-  - Description: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send Joel into the air afterwards.
-Downslash -
-  - Input: In air, {SHIFT} + {MOV} Back + {ATK}
-  - Easy Input: In air, {SPEC}
-  - Description: Thrust straight downwards with the Circuit Saber. Useful for getting to the ground quickly."
-label_settings = SubResource("LabelSettings_31mw7")
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="CloseButton" type="Button" parent="HelpScreen"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -99.0
-offset_right = 228.0
-offset_bottom = -25.0
-grow_vertical = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 30
-text = "  Close  "
-script = ExtResource("5_88nn1")
 
 [node name="ExitPopup" type="Panel" parent="."]
 visible = false
@@ -410,5 +314,4 @@ texture_normal = ExtResource("4_4eubx")
 action = "MenuConfirm"
 visibility_mode = 1
 
-[connection signal="pressed" from="HelpScreen/CloseButton" to="HelpScreen" method="_on_button_pressed"]
 [connection signal="visibility_changed" from="ExitPopup" to="ExitPopup" method="_visibility_changed"]

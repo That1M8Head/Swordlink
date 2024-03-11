@@ -8,13 +8,11 @@ func _ready():
 	get_tree().set_quit_on_go_back(false)
 
 func _input(event):
-	if $HelpScreen.visible:
-		return
 	if $ExitPopup.visible:
 		if event.is_action_pressed("ExitConfirm") or event.is_action_pressed("MenuConfirm"):
 			get_tree().quit()
 		elif event.is_action_pressed("ExitCancel") or event.is_action_pressed("MenuBack"):
-			$HelpScreen/MenuBack.play()
+			$MenuBack.play()
 			$ExitPopup.hide()
 	else:
 		if event.is_action_pressed("MenuUp") and Input.is_action_just_pressed("MenuUp"):
@@ -51,8 +49,7 @@ func start_new_game():
 	get_tree().change_scene_to_file("res://game.tscn")
 
 func open_options_menu():
-	$MenuSelect.play()
-	$HelpScreen.visible = true
+	get_tree().change_scene_to_file("res://help.tscn")
 
 func exit_game():
 	$MenuSelect.play()
