@@ -284,22 +284,22 @@ text = "Command List
 =============
 Sword Combo
   - Input: {ATK}
-  - Description: To attack, repeatedly press {ATK}. This combo is essentially infinite.
+  - Description: To attack with the Circuit Saber, repeatedly press {ATK}. This combo is essentially infinite.
 Evade
-  - Input: {EVADE}
-  - Perform a dash that passes through enemies. 
+  - Input: {MOV} + {EVADE}
+  - Make Joel perform a dash that passes through enemies. 
 Stinger
   - Input: {SHIFT} + {MOV} Forward + {ATK}
   - Easy Input: {MOV} + {SPEC}
-  - Description: Thrust yourself forward with your sword. Deals damage to a wide group of enemies.
+  - Description: Thrust Joel forward with the Circuit Saber. Deals damage to a wide group of enemies.
 Updraft
   - Input: On ground, {SHIFT} + {MOV} Back + {ATK}
   - Easy Input: On ground, {SPEC}
-  - Description: Swing your sword upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send yourself into the air afterwards.
+  - Description: Swing the Circuit Saber upwards, knocking enemies into the air. Continue holding {ATK} or {SPEC} to send Joel into the air afterwards.
 Downslash
   - Input: In air, {SHIFT} + {MOV} Back + {ATK}
   - Easy Input: In air, {SPEC}
-  - Description: Thrust straight downwards with your sword. Useful for getting to the ground quickly."
+  - Description: Thrust straight downwards with the Circuit Saber. Useful for getting to the ground quickly."
 label_settings = SubResource("LabelSettings_31mw7")
 vertical_alignment = 1
 autowrap_mode = 3
