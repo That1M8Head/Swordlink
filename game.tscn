@@ -86,6 +86,7 @@ shadow_offset = Vector2(4, 4)
 
 [sub_resource type="Animation" id="Animation_mglhw"]
 resource_name = "fade_in"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -316,7 +317,6 @@ max_value = 1000.0
 show_percentage = false
 
 [node name="Rank" type="VBoxContainer" parent="CanvasLayer/HUD/Style"]
-modulate = Color(1, 1, 1, 0.498039)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -329,7 +329,6 @@ offset_right = 73.5
 offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.36, 1.36)
 pivot_offset = Vector2(73, 114)
 theme_override_constants/separation = -20
 alignment = 1
