@@ -17,9 +17,9 @@ func _input(event):
 			$HelpScreen/MenuBack.play()
 			$ExitPopup.hide()
 	else:
-		if event.is_action_pressed("MenuUp"):
+		if event.is_action_pressed("MenuUp") and Input.is_action_just_pressed("MenuUp"):
 			select_previous_option()
-		elif event.is_action_pressed("MenuDown"):
+		elif event.is_action_pressed("MenuDown") and Input.is_action_just_pressed("MenuDown"):
 			select_next_option()
 		elif event.is_action_pressed("MenuConfirm"):
 			execute_selected_option()
