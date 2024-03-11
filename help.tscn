@@ -74,6 +74,7 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
 [node name="Page1" type="Control" parent="HelpScreen/Pages"]
+visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page1"]
@@ -106,6 +107,7 @@ label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 
 [node name="Page2" type="Control" parent="HelpScreen/Pages"]
+visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page2"]
@@ -141,6 +143,7 @@ autowrap_mode = 3
 script = ExtResource("2_hdp2q")
 
 [node name="Page3" type="Control" parent="HelpScreen/Pages"]
+visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="HelpScreen/Pages/Page3"]
