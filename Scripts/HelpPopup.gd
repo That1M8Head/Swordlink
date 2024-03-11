@@ -1,7 +1,7 @@
 extends ColorRect
 
 func _input(event):
-	if event.is_action_pressed("MenuBack"):
+	if event.is_action_pressed("MenuBack") and visible:
 		$MenuBack.play()
 		visible = false
 

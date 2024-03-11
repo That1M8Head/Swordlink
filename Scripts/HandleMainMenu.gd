@@ -8,12 +8,21 @@ func _ready():
 	get_tree().set_quit_on_go_back(false)
 
 func _input(event):
-	if event.is_action_pressed("MenuUp"):
-		select_previous_option()
-	elif event.is_action_pressed("MenuDown"):
-		select_next_option()
-	elif event.is_action_pressed("MenuConfirm"):
-		execute_selected_option()
+	if $HelpScreen.visible:
+		return
+	if $ExitPopup.visible:
+		if event.is_action_pressed("ExitConfirm") or event.is_action_pressed("MenuConfirm"):
+			get_tree().quit()
+		elif event.is_action_pressed("ExitCancel") or event.is_action_pressed("MenuBack"):
+			$HelpScreen/MenuBack.play()
+			$ExitPopup.hide()
+	else:
+		if event.is_action_pressed("MenuUp"):
+			select_previous_option()
+		elif event.is_action_pressed("MenuDown"):
+			select_next_option()
+		elif event.is_action_pressed("MenuConfirm"):
+			execute_selected_option()
 
 func select_option(index):
 	$MenuOptions.get_children()[selected_option_index].modulate = Color(1, 1, 1)
@@ -46,7 +55,8 @@ func open_options_menu():
 	$HelpScreen.visible = true
 
 func exit_game():
-	get_tree().quit()
-	
+	$MenuSelect.play()
+	$ExitPopup.show()
+
 func set_exit_label():
 	$MenuOptions/ExitGame.text = "EXIT TO " + OS.get_name().to_upper()

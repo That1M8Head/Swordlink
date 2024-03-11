@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmh48y7u3mt28"]
+[gd_scene load_steps=26 format=3 uid="uid://cmh48y7u3mt28"]
 
 [ext_resource type="Script" path="res://Scripts/HandleMainMenu.gd" id="1_k3gme"]
 [ext_resource type="AudioStream" uid="uid://2xua1dbv1kbj" path="res://Music/menu.mp3" id="1_ktdko"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/CloseButtonLabel.gd" id="5_88nn1"]
 [ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="6_4wvbr"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="8_mnxak"]
+[ext_resource type="Script" path="res://Scripts/ExitPopup.gd" id="9_njvhw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7t66e"]
 font_size = 105
@@ -63,6 +64,12 @@ MarginContainer/styles/Colour = SubResource("StyleBoxFlat_pcwvm")
 [sub_resource type="LabelSettings" id="LabelSettings_31mw7"]
 line_spacing = 0.0
 font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcp5a"]
+bg_color = Color(0.101961, 0.305882, 0.360784, 1)
+shadow_color = Color(0, 0, 0, 0.211765)
+shadow_size = 1
+shadow_offset = Vector2(20, 20)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -312,6 +319,66 @@ theme_override_font_sizes/font_size = 30
 text = "  Close  "
 script = ExtResource("5_88nn1")
 
+[node name="ExitPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -568.0
+offset_top = -320.0
+offset_right = 568.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dcp5a")
+script = ExtResource("9_njvhw")
+
+[node name="Message" type="VBoxContainer" parent="ExitPopup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -91.0
+offset_right = 0.5
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="ExitPopup/Message"]
+custom_minimum_size = Vector2(940, 0)
+layout_mode = 2
+text = "Funny Quote."
+label_settings = SubResource("LabelSettings_0yndp")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="ExitPopup/Message"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Confirm" type="Label" parent="ExitPopup/Message"]
+custom_minimum_size = Vector2(940, 0)
+layout_mode = 2
+text = "Press [CONFIRM] to quit."
+label_settings = SubResource("LabelSettings_0yndp")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Cancel" type="Label" parent="ExitPopup/Message"]
+custom_minimum_size = Vector2(940, 0)
+layout_mode = 2
+text = "Press [CANCEL] to return to menu."
+label_settings = SubResource("LabelSettings_0yndp")
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="TouchButtons" type="Node2D" parent="."]
 script = ExtResource("6_4wvbr")
 
@@ -345,3 +412,4 @@ action = "MenuConfirm"
 visibility_mode = 1
 
 [connection signal="pressed" from="HelpScreen/CloseButton" to="HelpScreen" method="_on_button_pressed"]
+[connection signal="visibility_changed" from="ExitPopup" to="ExitPopup" method="_visibility_changed"]
