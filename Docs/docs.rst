@@ -72,6 +72,67 @@ Use **Up** and **Down** to flip through the pages.
 When you're done reading through the help pages, press **Esc** (keyboard),
 **B** (controller) or **BACK** (touchscreen) to return back to the main menu.
 
+Controls
+--------
+
+To understand the following, you'll need to read these controls first.
+
+Keyboard Only
+^^^^^^^^^^^^^
+
+* **Move** - Left and Right arrow keys
+  * **Left** - Left arrow key
+  * **Right** - Right arrow key
+* **Jump** - Space key
+* **Attack** - Z key
+* **Special** - X key
+* **Evade** - C key or Shift key
+* **Mode-Shift** - Ctrl key
+* **Menu** - Esc key
+
+Keyboard and Mouse
+^^^^^^^^^^^^^^^^^^
+
+* **Move** - A and D keys
+  * **Left** - A key
+  * **Right** - D key
+* **Jump** - Space key
+* **Attack** - Left mouse button
+* **Special** - Right mouse button
+* **Evade** - Shift key
+* **Mode-Shift** - Middle mouse button
+* **Menu** - Esc key
+
+Controller (Xbox)
+^^^^^^^^^^^^^^^^^
+
+* **Move** - Left stick or D-Pad left/right
+  * **Left** - Left stick or D-Pad left
+  * **Right** - Left stick or D-Pad right
+* **Jump** - A button
+* **Attack** - Y button 
+* **Special** - X button
+* **Evade** - B button
+* **Mode-Shift** - Right bumper or right trigger
+* **Menu** - Start button (called Menu on Xbox One controllers)
+
+Touch
+^^^^^
+
+Touch controls are special in that they're represented by rounded squares
+with either text or glyphs. So, these will be descriptions based on their
+appearances.
+
+* **Move** - Left or right arrows
+  * **Left** - Left arrow
+  * **Right** - Right arrow
+* **Jump** - Up arrow
+* **Attack** - Sword tilted 90deg to the right
+* **Special** - Sword pointed right with arrows behind it
+* **Evade** - Fast-forward icon with a triangular hole in the middle
+* **Mode-Shift** - M button
+* **Menu** - BACK button
+
 Gameplay
 --------
 
@@ -85,16 +146,14 @@ Basics
 That young man holding the sword is Joel, your player character. The large
 blue bar is your health bar. Let that deplete and it's game over.
 
-Use the **Left** and **Right** arrow keys/buttons/stick directions to make Joel
-move around the level.
+Use the **Left** and **Right** to have Joel move around the level.
 
 Attacking
 ^^^^^^^^^
 
 When you're up close and personal to the demon heading straight for Joel,
-press the **Z** key, **Left** mouse button, **Y** controller button or
-the touch button that looks like a sword to attack. Repeatedly press this button
-to perform combos. This key will henceforth be called **Attack**.
+press the **Attack** button to attack. Repeatedly press this button
+to perform combos. 
 
 You'll notice a few things will happen on-screen next.
 
@@ -120,14 +179,13 @@ and the amount of health you regain is dependent on your style rank.
 Evasion
 ^^^^^^^
 
-While you're holding a movement direction, press the **Shift** key, **B**
-controller button or the touch button that looks like two arrows overlayed over
-each other to perform an evasion.
+While you're holding a movement direction, press the **Evade** button to make
+Joel perform an evasive dash.
 
 .. image:: gameplay-screenshot-4.png
 
-Evading will briefly turn Joel translucent, granting him a quick dash which
-lets him pass right through enemies - and he can still attack during this
+Evading will briefly turn Joel translucent, granting him a small boost of speed
+which lets him pass right through enemies - and he can still attack during this
 brief invincibility.
 
 Joel can even evade when he's in the middle of being trapped by a bunch of
@@ -139,16 +197,15 @@ Jumping & Aerial Combat
 Fighting on the ground is all well and good, but Joel can also take advantage
 of his technologically-enhanced jumping shoes to leap high into the air.
 
-Press the **Space** key, **A** controller button or the touch button with an
-upward-pointing arrow to make Joel jump.
+Press the **Jump** button to make Joel jump into the air.
 
 .. image:: gameplay-screenshot-5.png
 
-And while Joel is in the air, he can still move around and attack just the same.
+While Joel is in the air, he can still move around and attack just the same.
 
-Influence your mid-air movement with the **Left** and **Right** arrow
-keys/buttons/stick directions and press the **Z** key, **Left** mouse button,
-**Y** controller button or the sword touch button to perform attacks.
+Influence your mid-air movement with **Left** and **Right** and press the
+**Attack** button to perform an aerial attack, which are the same as grounded
+attacks.
 
 Performing aerial attacks will cause your style meter to fill up twice as fast,
 so prioritise attacking your enemies in the air. But how exactly do you get them
@@ -160,13 +217,13 @@ Special Attacks
 There are *two* ways to perform special attacks: through the Mode-Shift mechanic
 or through Easy Input.
 
-To use Mode-Shift, press and hold the **Ctrl** key, **Middle** mouse button,
-**RB** or **RT** controller buttons or the touch button with an **M** on it.
-Mode-Shift will lock Joel's orientation and slow down his movement.
+To use Mode-Shift, press and hold the **Mode-Shift** button. Mode-Shift will
+lock Joel's orientation and slow down his movement. In Mode-Shift, **Forward**
+means "press the direction Joel is facing" and **Back** means "press the
+opposite direction".
 
-To use Easy Input, press the **X** key, the **Right** mouse button, the **X**
-controller button or the touch button that looks like a sword on top of some
-arrows pointing right. This key will henceforth be called **Special**.
+To use Easy Input, press the **Special** key in combination with a movement
+direction.
 
 Stinger
 #######
