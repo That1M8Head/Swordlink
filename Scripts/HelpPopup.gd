@@ -9,11 +9,11 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("MenuBack"):
 		back_to_menu()
-	if event.is_action_pressed("MenuUp"):
+	if event.is_action_pressed("MenuUp") or event.is_action_pressed("MoveLeft"):
 		if current_page > 1:
 			$MenuMove.play()
 			current_page -= 1
-	if event.is_action_pressed("MenuDown"):
+	if event.is_action_pressed("MenuDown") or event.is_action_pressed("MoveRight"):
 		if current_page < total_pages:
 			$MenuMove.play()
 			current_page += 1
