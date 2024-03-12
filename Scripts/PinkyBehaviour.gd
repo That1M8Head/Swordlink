@@ -33,20 +33,23 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if proximity_raycast.is_colliding() and (proximity_raycast.get_collider() == player or proximity_raycast.get_collider() == player_hbox):
-		anims.play("attack")
-	elif is_on_floor() and attack_raycast.is_colliding() and (attack_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
-		if anims.animation == "idle":
-			$SeeSound.play()
-		anims.play("running")
-		velocity.x = -speed
-	elif is_on_floor() and flip_raycast.is_colliding() and (flip_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
-		if anims.animation == "idle":
-			$SeeSound.play()
-		anims.play("running")
-		velocity.x = speed
-	elif is_on_floor():
-		velocity.x = 0
+	if is_on_floor():
+		if proximity_raycast.is_colliding() and (proximity_raycast.get_collider() == player or proximity_raycast.get_collider() == player_hbox):
+			anims.play("attack")
+		elif attack_raycast.is_colliding() and (attack_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+			if anims.animation == "idle":
+				$SeeSound.play()
+			anims.play("running")
+			velocity.x = -speed
+		elif flip_raycast.is_colliding() and (flip_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+			if anims.animation == "idle":
+				$SeeSound.play()
+			anims.play("running")
+			velocity.x = speed
+		else:
+			velocity.x = 0
+			anims.play("idle")
+	else:
 		anims.play("idle")
 		
 	if (proximity_raycast.is_colliding() or flip_raycast.is_colliding()) and anims.animation == "attack":
