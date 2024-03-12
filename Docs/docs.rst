@@ -72,6 +72,34 @@ Use **Up** and **Down** to flip through the pages.
 When you're done reading through the help pages, press **Esc** (keyboard),
 **B** (controller) or **BACK** (touchscreen) to return back to the main menu.
 
+Difficulty Selection
+--------------------
+
+Choose "NEW GAME" and you'll be shown the difficulty selection popup. Here,
+you can choose between four difficulty levels.
+
+.. image:: difficulty-screenshot.png
+
+The difficulty levels are **Framecapped**, **Boosted**, **Overclocked** and
+**Glitchfall**.
+
+Use **Up** and **Down** to select an option, and press **Enter** (keyboard),
+**A** (controller) or **OK** (touchscreen) to start the game with the
+selected difficulty.
+
+Difficulties
+^^^^^^^^^^^^
+
+* **Framecapped** - Enemy movement speed is slowed down, giving you ample time
+  to react. Intended for touchscreen players.
+* **Boosted** - Enemy movement speed is normal, providing a balanced challenge.
+  Intended for beginners.
+* **Overclocked** - Enemy movement speed is doubled, so you have less time to
+  react. Intended for skilled players.
+* **Glitchfall** - Not only is the enemy movement speed doubled, but you will
+  no longer regenerate health when defeating enemies. Intended for players who
+  are REALLY good at not getting hit.
+
 Controls
 --------
 
@@ -132,7 +160,8 @@ appearances.
 Gameplay
 --------
 
-Choose "NEW GAME" to start a new game, jumping straight into the action.
+After choosing a difficulty level, the game will start, and you'll be
+thrown straight into the action.
 
 Basics
 ^^^^^^
@@ -168,9 +197,10 @@ S. But be careful, because waiting around or getting hit will make it drop.
 
 .. image:: gameplay-screenshot-3.png
 
-In addition to raising your style meter, defeating enemies will refill your
-health, so be mindful of how much damage you take and how much you dish out,
-and the amount of health you regain is dependent on your style rank.
+In addition to raising your style meter, on difficulty levels other than
+Glitchfall, defeating enemies will refill your health, so be mindful of how much
+damage you take and how much you dish out. The amount of health you regain
+is dependent on your style rank.
 
 Evasion
 ^^^^^^^
