@@ -1,7 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://csxd6u24f1mun"]
+[gd_scene load_steps=11 format=3 uid="uid://csxd6u24f1mun"]
 
 [ext_resource type="Texture2D" uid="uid://cg6w82digfm0k" path="res://Graphics/velocity-logo.png" id="1_d27rr"]
 [ext_resource type="Script" path="res://Scripts/SwitchToTitleScreen.gd" id="2_uy7ni"]
+[ext_resource type="Texture2D" uid="uid://tnn5ney6t03h" path="res://Graphics/xboxwireless.webp" id="3_a31si"]
+[ext_resource type="Texture2D" uid="uid://xy5p2sneyuh4" path="res://Graphics/dualsense.webp" id="4_6yu1n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4dxy"]
+font_size = 85
+
+[sub_resource type="LabelSettings" id="LabelSettings_20kim"]
+font_size = 70
+
+[sub_resource type="Animation" id="Animation_xlton"]
+resource_name = "show"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 4.1, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfm2i"]
+_data = {
+"show": SubResource("Animation_xlton")
+}
 
 [sub_resource type="Animation" id="Animation_r7f4q"]
 resource_name = "fade_in_out"
@@ -41,6 +70,86 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ControllerRecommended" type="Control" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ControllerRecommended"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0431373, 0.341176, 0.529412, 1)
+
+[node name="Title" type="Label" parent="ControllerRecommended"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -415.0
+offset_bottom = -299.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "REAL SWORDLINKERS USE A CONTROLLER"
+label_settings = SubResource("LabelSettings_q4dxy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="ControllerRecommended"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 304.0
+offset_bottom = 407.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A controller is highly recommended."
+label_settings = SubResource("LabelSettings_20kim")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controllers" type="HBoxContainer" parent="ControllerRecommended"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -651.0
+offset_top = -228.0
+offset_right = 652.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(651, 228)
+
+[node name="TextureRect" type="TextureRect" parent="ControllerRecommended/Controllers"]
+texture_filter = 2
+layout_mode = 2
+texture = ExtResource("3_a31si")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="ControllerRecommended/Controllers"]
+texture_filter = 2
+layout_mode = 2
+texture = ExtResource("4_6yu1n")
+expand_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControllerRecommended"]
+libraries = {
+"": SubResource("AnimationLibrary_jfm2i")
+}
 
 [node name="VelocityLogo" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)

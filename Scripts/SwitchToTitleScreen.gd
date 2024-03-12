@@ -2,6 +2,8 @@ extends Control
 
 func _ready():
 	await($VelocityLogo/AnimationPlayer.animation_finished)
+	$ControllerRecommended/AnimationPlayer.play("show")
+	await($ControllerRecommended/AnimationPlayer.animation_finished)
 	go_to_menu()
 
 func _input(event):

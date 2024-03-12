@@ -18,6 +18,7 @@ config/icon="res://Graphics/icon.svg"
 [autoload]
 
 FullScreen="*res://Scripts/FullScreen.gd"
+DifficultyHandling="*res://Scripts/DifficultyHandling.gd"
 
 [display]
 

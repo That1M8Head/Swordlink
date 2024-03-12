@@ -8,6 +8,8 @@ func _ready():
 	get_tree().set_quit_on_go_back(false)
 
 func _input(event):
+	if $DifficultyPopup.visible:
+		return
 	if $ExitPopup.visible:
 		if event.is_action_pressed("ExitConfirm") or event.is_action_pressed("MenuConfirm"):
 			get_tree().quit()
@@ -46,7 +48,8 @@ func execute_selected_option():
 			exit_game()
 
 func start_new_game():
-	get_tree().change_scene_to_file("res://game.tscn")
+	$MenuSelect.play()
+	$DifficultyPopup.show()
 
 func open_options_menu():
 	get_tree().change_scene_to_file("res://help.tscn")

@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-var speed = 400.0
+var speed = 100.0
 var player: Node2D
 var player_hbox: Node2D
 var anims: AnimatedSprite2D
 var health: int = 100
+
+@onready var difficulty_handler = get_node("/root/DifficultyHandling")
+
 @onready var attack_raycast = $AttackRaycast
 @onready var flip_raycast = $FlipRaycast
 @onready var proximity_raycast = $ProximityRaycast
@@ -17,6 +20,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var knockback: Vector2
 
 func _ready():
+	match difficulty_handler.level:
+		0:
+			speed = 100.0
+		1:
+			speed = 200.0
+		2:
+			speed = 400.0
+
 	anims = $AnimatedSprite2D
 	anims.play("idle")
 
