@@ -27,6 +27,8 @@ func _ready():
 			speed = 200.0
 		2:
 			speed = 400.0
+		3:
+			speed = 400.0
 
 	anims = $AnimatedSprite2D
 	anims.play("idle")

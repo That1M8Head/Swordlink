@@ -6,7 +6,6 @@ func _ready():
 		"Oh, come on! What do you call that?",
 		"RIP In Pieces",
 		"The devil may not cry, but you sure do.",
-		"There isn't an easy mode. Sorry.",
 		"What the frick is a Glitchfall, anyway?",
 		"Don't worry, it's just a demo!",
 		"You have an evade button for a reason.",
@@ -28,5 +27,7 @@ func _ready():
 			"Is your controller dead or something?",
 			"Press Alt-F4 for free iPod",
 		])
+	if get_node("/root/DifficultyHandling").level > 0:
+		quotes.append("Maybe Framecapped mode is more your speed.")
 	text = quotes[randi_range(0, len(quotes) - 1)]
 

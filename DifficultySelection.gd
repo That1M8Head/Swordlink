@@ -38,11 +38,13 @@ func update_tooltip():
 	var description: String
 	match selected_option_index:
 		0:  # Framecapped
-			description = "The world is just a little bit slower than normal."
+			description = "Enemy speed is severely slowed down. It's kind of a joke."
 		1:  # Boosted
-			description = "The enemies are only as dangerous as you aren't."
+			description = "The enemies are only dangerous if you're bad at fighting."
 		2:  # Overclocked
 			description = "Think you're fast? Try monsters with double the speed!"
+		3:  # Glitchfall
+			description = "Not enough pain? Your health will no longer regen on kills."
 	tooltip.text = description
 
 func execute_selected_option():

@@ -357,6 +357,14 @@ label_settings = SubResource("LabelSettings_0yndp")
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="Difficulty4" type="Label" parent="DifficultyPopup/Message/DifficultyOptions"]
+custom_minimum_size = Vector2(940, 0)
+layout_mode = 2
+text = "Glitchfall"
+label_settings = SubResource("LabelSettings_0yndp")
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Spacer2" type="Control" parent="DifficultyPopup/Message"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
