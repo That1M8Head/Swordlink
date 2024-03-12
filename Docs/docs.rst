@@ -203,6 +203,10 @@ Influence your mid-air movement with **Left** and **Right** and press the
 **Attack** button to perform an aerial attack, which are the same as grounded
 attacks.
 
+It's worth noting here that enemies that are in the air are incapable of moving
+or attacking, and will keep their current velocity. You can use this to your
+advantage by knocking them away from you with an aerial attack.
+
 Performing aerial attacks will cause your style meter to fill up twice as fast,
 so prioritise attacking your enemies in the air. But how exactly do you get them
 *in* the air...?
