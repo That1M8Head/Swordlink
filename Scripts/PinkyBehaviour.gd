@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 100.0
+var speed = 400.0
 var player: Node2D
 var player_hbox: Node2D
 var anims: AnimatedSprite2D
@@ -9,7 +9,7 @@ var health: int = 100
 @onready var flip_raycast = $FlipRaycast
 @onready var proximity_raycast = $ProximityRaycast
 
-var total_time = 0.4
+var total_time = 0.3
 var current_time = 0.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -35,17 +35,17 @@ func _physics_process(delta):
 
 	if proximity_raycast.is_colliding() and (proximity_raycast.get_collider() == player or proximity_raycast.get_collider() == player_hbox):
 		anims.play("attack")
-	elif attack_raycast.is_colliding() and (attack_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+	elif is_on_floor() and attack_raycast.is_colliding() and (attack_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
 		if anims.animation == "idle":
 			$SeeSound.play()
 		anims.play("running")
 		velocity.x = -speed
-	elif flip_raycast.is_colliding() and (flip_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
+	elif is_on_floor() and flip_raycast.is_colliding() and (flip_raycast.get_collider() == player or attack_raycast.get_collider() == player_hbox):
 		if anims.animation == "idle":
 			$SeeSound.play()
 		anims.play("running")
 		velocity.x = speed
-	else:
+	elif is_on_floor():
 		velocity.x = 0
 		anims.play("idle")
 		
