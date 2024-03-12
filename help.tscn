@@ -250,7 +250,7 @@ visibility_mode = 1
 position = Vector2(1870, 680)
 
 [node name="Back" type="TouchScreenButton" parent="TouchButtons/Right"]
-position = Vector2(-255, 0)
+position = Vector2(-575, 0)
 texture_normal = ExtResource("13_abhds")
 action = "MenuBack"
 visibility_mode = 1
