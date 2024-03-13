@@ -90,15 +90,15 @@ selected difficulty.
 Difficulties
 ^^^^^^^^^^^^
 
-* **Framecapped** - Enemy movement speed is slowed down, giving you ample time
-  to react. Intended for touchscreen players.
-* **Boosted** - Enemy movement speed is normal, providing a balanced challenge.
-  Intended for beginners.
-* **Overclocked** - Enemy movement speed is doubled, so you have less time to
-  react. Intended for skilled players.
-* **Glitchfall** - Not only is the enemy movement speed doubled, but you will
-  no longer regenerate health when defeating enemies. Intended for players who
-  are REALLY good at not getting hit.
+* **Framecapped** - Enemy movement and attack speed is slowed down, giving you
+  ample time to react. Intended for touchscreen players.
+* **Boosted** - Enemy movement and attack speed is normal, providing a balanced
+  challenge.  Intended for beginners.
+* **Overclocked** - Enemy movement speed is doubled, and they attack much
+  faster, so you have less time to react. Intended for skilled players.
+* **Glitchfall** - Not only is the enemy faster,, but you will no longer
+  regenerate health when defeating enemies. Intended for players who are REALLY
+  good at not getting hit.
 
 Controls
 --------
