@@ -34,6 +34,7 @@ font_size = 40
 font_size = 36
 
 [node name="HelpMenu" type="Control"]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,11 +117,89 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 118.0
 grow_horizontal = 2
+text = "Plot"
+label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
+
+[node name="Plot" type="Label" parent="HelpScreen/Pages/Page2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "You are Joel <no last name>, a young man, brilliant programmer and self-proclaimed \"Swordlinker\" - presently the only one capable of battling against the digital demons who threaten the world as he knows it.
+
+His personal sword, the Circuit Saber, is a weapon built by Joel himself, constructed using digital enhancement techniques that can physically attack the digitally intangible as if they were any other monsters.
+
+(The following plot is specific to the Public University Demo.)
+
+Right now, he's practicing in his special simulated environment, which is actually his basement.
+He just somehow managed to transform it into a digital environment where he can take the fight to enemies that he himself created... for training purposes, of course."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+
+[node name="Page3" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
+text = "Controls List"
+label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
+
+[node name="Controls" type="Label" parent="HelpScreen/Pages/Page3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "{MOV} - Move: Move Joel left and right.
+
+{ATK} - Attack: Attack with the Circuit Saber.
+
+{JMP} - Jump: Make Joel leap into the air.
+
+{EVADE} - Evade: Briefly turn Joel invisible and make him dash in the chosen left/right direction.
+
+{SHIFT} - Mode-Shift: Lock Joel's rotation and slow down his grounded speed. Grants access to special attacks with {ATK}.
+
+{SPEC} - Special Attack: Perform special attacks easily without having to use Mode-Shift.
+
+{MENU} - Back to Menu: Return to the main menu. This control will end the game."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
+script = ExtResource("2_hdp2q")
+
+[node name="Page4" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page4"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
 text = "Basic Controls"
 label_settings = SubResource("LabelSettings_nendp")
 autowrap_mode = 3
 
-[node name="BasicControls" type="Label" parent="HelpScreen/Pages/Page2"]
+[node name="BasicControls" type="Label" parent="HelpScreen/Pages/Page4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,11 +221,11 @@ label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 script = ExtResource("2_hdp2q")
 
-[node name="Page3" type="Control" parent="HelpScreen/Pages"]
+[node name="Page5" type="Control" parent="HelpScreen/Pages"]
 visible = false
 layout_mode = 2
 
-[node name="Title" type="Label" parent="HelpScreen/Pages/Page3"]
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page5"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -156,7 +235,7 @@ text = "Special Attacks"
 label_settings = SubResource("LabelSettings_nendp")
 autowrap_mode = 3
 
-[node name="SpecialAttacks" type="Label" parent="HelpScreen/Pages/Page3"]
+[node name="SpecialAttacks" type="Label" parent="HelpScreen/Pages/Page5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,6 +260,40 @@ Downslash: Thrust straight downwards with the Circuit Saber. Useful for getting 
 label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 script = ExtResource("2_hdp2q")
+
+[node name="Page6" type="Control" parent="HelpScreen/Pages"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HelpScreen/Pages/Page6"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 118.0
+grow_horizontal = 2
+text = "Need More Help?"
+label_settings = SubResource("LabelSettings_nendp")
+autowrap_mode = 3
+
+[node name="NeedMoreHelp" type="Label" parent="HelpScreen/Pages/Page6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 142.0
+offset_bottom = 16.115
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "For more in-depth documentation about the game, see the Swordlink: Glitchfall Chronicles official documentation, affectionately called \"the Docs\".
+
+You should have received a copy of the Docs with Swordlink: Glitchfall Chronicles. It's typically in the file \"docs.html\" or \"docs.rst\".
+
+If the Docs aren't bundled with your copy of the game, please check at the link:
+<https://github.com/That1M8Head/Swordlink/blob/main/Docs/docs.rst>."
+label_settings = SubResource("LabelSettings_31mw7")
+autowrap_mode = 3
 
 [node name="CloseButton" type="Button" parent="HelpScreen"]
 layout_mode = 1

@@ -1,7 +1,7 @@
 extends ColorRect
 
 var current_page = 1
-var total_pages = 3
+var total_pages = 6
 
 func _ready():
 	$MenuSelect.play()

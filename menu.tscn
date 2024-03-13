@@ -59,6 +59,7 @@ shadow_offset = Vector2(20, 20)
 font_size = 32
 
 [node name="MainMenu" type="Control"]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

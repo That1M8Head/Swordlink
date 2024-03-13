@@ -64,8 +64,8 @@ Choose "INFO & CONTROLS" and you'll be taken to the help menu.
 
 .. image:: help-screenshot.png
 
-The help menu is split into three pages - **About**, **Basic Controls** and
-**Special Attacks**.
+The help menu is split into six pages - **About**, **Plot**, **Controls List**,
+**Basic Controls**, **Special Attacks** and **Need More Help?**
 
 Use **Up** and **Down** to flip through the pages.
 

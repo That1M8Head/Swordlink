@@ -12,6 +12,7 @@ hinting = 0
 subpixel_positioning = 0
 
 [node name="Debugger" type="Control"]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
