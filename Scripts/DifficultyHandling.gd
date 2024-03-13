@@ -1,3 +1,10 @@
 extends Node
 
-var level := 1
+enum DIFFICULTY {
+	FRAMECAPPED,
+	BOOSTED,
+	OVERCLOCKED,
+	GLITCHFALL
+}
+
+var level := DIFFICULTY.BOOSTED

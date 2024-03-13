@@ -21,16 +21,16 @@ var knockback: Vector2
 
 func _ready():
 	match difficulty_handler.level:
-		0:
+		difficulty_handler.DIFFICULTY.FRAMECAPPED:
 			speed = 100.0
 			total_time = 0.5
-		1:
+		difficulty_handler.DIFFICULTY.BOOSTED:
 			speed = 200.0
 			total_time = 0.3
-		2:
+		difficulty_handler.DIFFICULTY.OVERCLOCKED:
 			speed = 400.0
 			total_time = 0.2
-		3:
+		difficulty_handler.DIFFICULTY.GLITCHFALL:
 			speed = 400.0
 			total_time = 0.2
 
