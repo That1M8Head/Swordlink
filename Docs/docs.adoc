@@ -94,8 +94,8 @@ you ample time to react. Intended for touchscreen players.
 balanced challenge. Intended for beginners.
 * *Overclocked* - Enemy movement speed is doubled, and they attack much
 faster, so you have less time to react. Intended for skilled players.
-* *Glitchfall* - Not only is the enemy faster,, but you will no longer
-regenerate health when defeating enemies. Intended for players who are
+* *Glitchfall* - Not only do enemies move and attack faster, but you will no
+longer regenerate health when defeating enemies. Intended for players who are
 REALLY good at not getting hit.
 
 == Controls
