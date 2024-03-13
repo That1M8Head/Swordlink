@@ -23,12 +23,16 @@ func _ready():
 	match difficulty_handler.level:
 		0:
 			speed = 100.0
+			total_time = 0.5
 		1:
 			speed = 200.0
+			total_time = 0.3
 		2:
 			speed = 400.0
+			total_time = 0.2
 		3:
 			speed = 400.0
+			total_time = 0.2
 
 	anims = $AnimatedSprite2D
 	anims.play("idle")
