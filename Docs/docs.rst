@@ -78,7 +78,7 @@ Difficulty Selection
 Choose "NEW GAME" and you'll be shown the difficulty selection popup. Here,
 you can choose between four difficulty levels.
 
-.. image:: difficulty-screenshot.png
+.. image:: difficulty-popup.png
 
 The difficulty levels are **Framecapped**, **Boosted**, **Overclocked** and
 **Glitchfall**.
