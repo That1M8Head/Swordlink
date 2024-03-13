@@ -288,10 +288,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 1
 text = "For more in-depth documentation about the game, see the Swordlink: Glitchfall Chronicles official documentation, affectionately called \"the Docs\".
 
-You should have received a copy of the Docs with Swordlink: Glitchfall Chronicles. It's typically in the file \"docs.html\" or \"docs.rst\".
+You should have received a copy of the Docs with Swordlink: Glitchfall Chronicles. It's typically in the file \"docs.html\" or \"docs.adoc\".
 
 If the Docs aren't bundled with your copy of the game, please check at the link:
-<https://github.com/That1M8Head/Swordlink/blob/main/Docs/docs.rst>."
+<https://github.com/That1M8Head/Swordlink/blob/main/Docs/docs.adoc>."
 label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 
