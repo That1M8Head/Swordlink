@@ -325,7 +325,7 @@ func deal_damage(body, damage: int, knockback: Vector2):
 	if damage > body.health and difficulty_handler.level < 3:
 		var health_reward = damage / 6
 		health += health_reward * (style_rank + 1)
-	style_duration += damage * 48 if body.is_on_floor() else damage * 24
+	style_duration += damage * 48 if not body.is_on_floor() else damage * 12
 	var flip = -1 if $JoelSprite.flip_h else 1
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 
