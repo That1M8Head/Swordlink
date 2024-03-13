@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://0e7tulo1bnel" path="res://Sounds/Menu/Return.wav" id="4_pwklc"]
 [ext_resource type="AudioStream" uid="uid://00u7u4wd00fr" path="res://Sounds/Menu/Select.wav" id="5_0jvob"]
 [ext_resource type="Script" path="res://Scripts/PositionTouchButtons.gd" id="6_4wvbr"]
-[ext_resource type="Script" path="res://DifficultySelection.gd" id="8_icr6m"]
+[ext_resource type="Script" path="res://Scripts/DifficultySelection.gd" id="8_eerp0"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="8_mnxak"]
 [ext_resource type="Script" path="res://Scripts/ExitPopup.gd" id="9_njvhw"]
 
@@ -301,7 +301,7 @@ offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dcp5a")
-script = ExtResource("8_icr6m")
+script = ExtResource("8_eerp0")
 
 [node name="Message" type="VBoxContainer" parent="DifficultyPopup"]
 layout_mode = 1
@@ -372,7 +372,8 @@ layout_mode = 2
 [node name="Tooltip" type="Label" parent="DifficultyPopup/Message"]
 custom_minimum_size = Vector2(940, 0)
 layout_mode = 2
-text = "Description goes here."
+text = "Description goes here.
+And here's who it's for."
 label_settings = SubResource("LabelSettings_kwj1i")
 horizontal_alignment = 1
 autowrap_mode = 3

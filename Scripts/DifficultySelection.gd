@@ -45,9 +45,13 @@ func update_tooltip():
 	var description: String
 	match selected_option_index:
 		DIFFICULTY.FRAMECAPPED:
+			description = "Enemy speed is severely slowed down. It's kind of a joke.\nRecommended for total beginners."
 		DIFFICULTY.BOOSTED:
+			description = "The enemies are only dangerous if you're bad at fighting.\nRecommended for most players."
 		DIFFICULTY.OVERCLOCKED:
+			description = "The enemies will rarely give you a chance to breathe.\nRecommended for experienced players."
 		DIFFICULTY.GLITCHFALL:
+			description = "Overclocked, but you no longer regain health on kills.\nRecommended for daring players."
 	tooltip.text = description
 
 func execute_selected_option():
