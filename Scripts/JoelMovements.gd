@@ -4,6 +4,8 @@ const SPEED = 400.0
 const JUMP_VELOCITY = -500.0
 const DECELERATION = 1300.0
 
+var enemy_count: int = 0
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var health: int
@@ -126,6 +128,9 @@ func _process(delta):
 		style_rank -= 1
 	health = clamp(health, 0, health_bar.max_value)
 	style_duration = clamp(style_duration, -1, style_rank_meter.max_value)
+	enemy_count = get_tree().get_nodes_in_group("Enemy").size()
+	if enemy_count < 1:
+		get_tree().change_scene_to_file("res://victory.tscn")
 	if health_bar.value <= 0:
 		get_tree().change_scene_to_file("res://death_screen.tscn")
 	if Input.is_action_just_pressed("Menu"):
@@ -325,7 +330,7 @@ func deal_damage(body, damage: int, knockback: Vector2):
 	if damage > body.health and difficulty_handler.level < 3:
 		var health_reward = damage / 6
 		health += health_reward * (style_rank + 1)
-	style_duration += damage * 48 if not body.is_on_floor() else damage * 12
+	style_duration += damage * 48 if not body.is_on_floor() else damage * 19
 	var flip = -1 if $JoelSprite.flip_h else 1
 	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
 

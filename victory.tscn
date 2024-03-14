@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://sj6txargah3u"]
+
+[ext_resource type="Script" path="res://Scripts/BackToMenuFromDeath.gd" id="1_pqo43"]
+[ext_resource type="Script" path="res://Scripts/UpdateVictoryMessageTitle.gd" id="2_jk6mi"]
+[ext_resource type="Script" path="res://Scripts/UpdateFunnyQuoteVictory.gd" id="3_o1pmf"]
+[ext_resource type="Script" path="res://Scripts/UpdateDeathTooltips.gd" id="4_2u8sr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfujd"]
+font_size = 105
+
+[sub_resource type="LabelSettings" id="LabelSettings_xt1fs"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_0vd8t"]
+font_size = 36
+
+[node name="VictoryScreen" type="Control"]
+texture_filter = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pqo43")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14902, 0.368627, 0.686275, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.5
+offset_top = -203.5
+offset_right = 395.5
+offset_bottom = 203.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 45
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "You Are Die"
+label_settings = SubResource("LabelSettings_nfujd")
+horizontal_alignment = 1
+script = ExtResource("2_jk6mi")
+
+[node name="Subtitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Insert funny phrase here."
+label_settings = SubResource("LabelSettings_xt1fs")
+horizontal_alignment = 1
+script = ExtResource("3_o1pmf")
+
+[node name="Tooltips" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Press Enter to return to the menu."
+label_settings = SubResource("LabelSettings_0vd8t")
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_2u8sr")
