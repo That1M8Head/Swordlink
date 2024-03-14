@@ -124,7 +124,9 @@ To understand the following, you'll need to read these controls first.
 * *Mode-Shift* - Middle mouse button
 * *Menu* - Esc key
 
-=== Controller (Xbox)
+=== Controller
+
+Uses Xbox One controller bindings.
 
 * *Left* - Left stick or D-Pad left
 * *Right* - Left stick or D-Pad right
@@ -133,13 +135,25 @@ To understand the following, you'll need to read these controls first.
 * *Special* - X button
 * *Evade* - B button
 * *Mode-Shift* - Right bumper or right trigger
-* *Menu* - Start button (called Menu on Xbox One controllers)
+* *Menu* - Menu button
+
+For PlayStation, subsitute A, B, X, and Y for Cross,
+Circle, Square, and Triangle respectively. Right bumper and right trigger
+are R1 and R2. Menu is Options on DualShock 4 and DualSense controllers.
+
+For Nintendo, swap A and B, and X and Y. Right bumper and right trigger
+are R and ZR. Menu is + on Nintendo Switch controllers.
+
+For controllers I didn't cover, you can probably ask someone who
+understands the SDL game controller DB library.
 
 === Touch
 
 Touch controls are special in that they're represented by rounded
 squares with either text or glyphs. So, these will be descriptions based
 on their appearances.
+
+image:touch-controls.png[image]
 
 * *Left* - Left arrow
 * *Right* - Right arrow
