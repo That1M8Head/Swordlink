@@ -155,15 +155,14 @@ func _physics_process(delta):
 	var blocking_attack = stinger or updraft
 	if not blocking_attack:
 		var direction = Input.get_axis("MoveLeft", "MoveRight")
-		if direction:
-			if not dashing and Input.is_action_just_pressed("Evade"):
-				do_evasion()
-			elif not dashing:
-				if is_on_floor():
-					velocity.x = direction * move_speed
-				else:
-					velocity.x += direction * move_speed * delta * 4
-				velocity.x = clamp(velocity.x, -move_speed, move_speed)
+		if not dashing and Input.is_action_just_pressed("Evade"):
+			do_evasion()
+		if direction and not dashing:
+			if is_on_floor():
+				velocity.x = direction * move_speed
+			else:
+				velocity.x += direction * move_speed * delta * 4
+			velocity.x = clamp(velocity.x, -move_speed, move_speed)
 		elif is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
 
@@ -212,13 +211,22 @@ func _physics_process(delta):
 	if dashing:
 		reset_evasion_flags()
 
+
+func direction_facing(sprite: AnimatedSprite2D) -> int:
+	if sprite.flip_h:
+		return -1
+	else:
+		return 1
+
 func do_evasion():
 	var direction = Input.get_axis("MoveLeft", "MoveRight")
+	direction = direction_facing($JoelSprite) if direction == 0 else direction
+	var move_speed = direction * SPEED * 3 if is_on_floor() else direction * SPEED * 1.8
 	dashing = true
 	modulate = Color(1, 1, 1, 0.5)
 	$DodgeSound.play()
 	set_collision_mask_value(2, false)
-	velocity.x = direction * SPEED * 2
+	velocity.x = move_speed
 
 func reset_evasion_flags():
 	await(get_tree().create_timer(0.3).timeout)

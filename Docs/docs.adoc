@@ -63,8 +63,8 @@ Choose "INFO & CONTROLS" and you'll be taken to the help menu.
 
 image:help-screenshot.png[image]
 
-The help menu is split into six pages - *About*, *Plot*, *Controls
-List*, *Basic Controls*, *Special Attacks* and *Need More Help?*
+The help menu is split into six pages - *About*, *Plot*, *Controls*
+*List*, *Basic Controls*, *Special Attacks* and *Need More Help?*
 
 Use *Up* and *Down* to flip through the pages.
 
@@ -194,8 +194,8 @@ you regain is dependent on your style rank.
 
 === Evasion
 
-While you're holding a movement direction, press the *Evade* button to
-make Joel perform an evasive dash.
+Press the *Evade* button to perform an evasive dash. Hold a movement control
+(*Left* or *Right*) before pressing the button to direct your evasion.
 
 image:gameplay-screenshot-4.png[image]
 
