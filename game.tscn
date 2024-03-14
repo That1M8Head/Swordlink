@@ -395,19 +395,19 @@ action = "Jump"
 visibility_mode = 1
 
 [node name="Attack" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
-position = Vector2(-255, 0)
+position = Vector2(-254, -320)
 texture_normal = ExtResource("8_61562")
 action = "Attack"
 visibility_mode = 1
 
 [node name="Evade" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
-position = Vector2(-575, -319)
+position = Vector2(-255, 0)
 texture_normal = ExtResource("6_sx16c")
 action = "Evade"
 visibility_mode = 1
 
 [node name="AltAttack" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/Right"]
-position = Vector2(-255, -319)
+position = Vector2(-575, -320)
 texture_normal = ExtResource("9_p15gg")
 action = "AltAttack"
 visibility_mode = 1
