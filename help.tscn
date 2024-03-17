@@ -180,7 +180,7 @@ text = "{MOV} - Move: Move Joel left and right.
 
 {SPEC} - Special Attack: Perform special attacks easily without having to use Mode-Shift.
 
-{MENU} - Back to Menu: Return to the main menu. This control will end the game."
+{MENU} - Pause: Pause the game, in case you want to take a short break or go back to the menu."
 label_settings = SubResource("LabelSettings_31mw7")
 autowrap_mode = 3
 script = ExtResource("2_hdp2q")

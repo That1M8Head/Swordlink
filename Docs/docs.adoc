@@ -104,6 +104,15 @@ To understand the following, you'll need to read these controls first.
 
 === Keyboard Only
 
+==== Menu
+
+* *Up* - Up arrow key
+* *Down* - Down arrow key
+* *Confirm* - Enter key
+* *Back* - Esc key
+
+==== Gameplay
+
 * *Left* - Left arrow key
 * *Right* - Right arrow key
 * *Jump* - Space key
@@ -114,6 +123,12 @@ To understand the following, you'll need to read these controls first.
 * *Menu* - Esc key
 
 === Keyboard and Mouse
+
+==== Menu
+
+Same as Keyboard Only.
+
+==== Gameplay
 
 * *Left* - A key
 * *Right* - D key
@@ -127,6 +142,15 @@ To understand the following, you'll need to read these controls first.
 === Controller
 
 Uses Xbox One controller bindings.
+
+==== Menu
+
+* *Up* - D-Pad up
+* *Down* - D-Pad down
+* *Confirm* - A button
+* *Back* - B button
+
+==== Gameplay
 
 * *Left* - Left stick or D-Pad left
 * *Right* - Left stick or D-Pad right
@@ -152,6 +176,17 @@ understands the SDL game controller DB library.
 Touch controls are special in that they're represented by rounded
 squares with either text or glyphs. So, these will be descriptions based
 on their appearances.
+
+==== Menu
+
+image:touch-c-menu.png[image]
+
+* *Up* - Up arrow
+* *Down* - Down arrow
+* *Confirm* - OK
+* *Back* - BACK
+
+==== Gameplay
 
 image:touch-controls.png[image]
 
@@ -309,3 +344,12 @@ To use Downslash with Easy Input, while Joel is in the air, press the
 *Special* button without touching a movement direction.
 
 image:downslash.png[image]
+
+== Pausing
+
+Need to take a break? You can pause the game at any time by pressing *Menu*.
+
+image:pause-screenshot.png[image]
+
+In the pause menu, you have two options - returning to the main menu
+with *Confirm*, or resuming the game with *Back* or *Menu*.
