@@ -137,6 +137,8 @@ func _input(event):
 func open_menu():
 	get_tree().paused = true
 	$PauseSound.play()
+	get_node(\"/root/Game/CanvasLayer/TouchButtons\").hide()
+	get_node(\"/root/Game/CanvasLayer/TouchButtonsPause\").show()
 	show()
 	menu_open = true
 
@@ -144,6 +146,7 @@ func close_menu():
 	hide()
 	$PauseSoundExit.play()
 	get_node(\"/root/Game/CanvasLayer/TouchButtons\").show()
+	get_node(\"/root/Game/CanvasLayer/TouchButtonsPause\").hide()
 	menu_open = false
 	await(get_tree().create_timer(0.1).timeout)
 	get_tree().paused = false
@@ -529,23 +532,24 @@ volume_db = -10.0
 stream = ExtResource("11_yw1am")
 volume_db = -10.0
 
-[node name="TouchButtons" type="Node2D" parent="CanvasLayer/PauseMenu"]
-position = Vector2(-452, -365)
+[node name="TouchButtonsPause" type="Node2D" parent="CanvasLayer"]
+process_mode = 2
+visible = false
 script = ExtResource("3_md8pn")
 
-[node name="Left" type="Node2D" parent="CanvasLayer/PauseMenu/TouchButtons"]
+[node name="Left" type="Node2D" parent="CanvasLayer/TouchButtonsPause"]
 position = Vector2(1870, 680)
 
-[node name="Right" type="Node2D" parent="CanvasLayer/PauseMenu/TouchButtons"]
+[node name="Right" type="Node2D" parent="CanvasLayer/TouchButtonsPause"]
 position = Vector2(1870, 680)
 
-[node name="Back" type="TouchScreenButton" parent="CanvasLayer/PauseMenu/TouchButtons/Right"]
+[node name="Back" type="TouchScreenButton" parent="CanvasLayer/TouchButtonsPause/Right"]
 position = Vector2(-575, 0)
 texture_normal = ExtResource("13_lmq0m")
 action = "MenuBack"
 visibility_mode = 1
 
-[node name="Ok" type="TouchScreenButton" parent="CanvasLayer/PauseMenu/TouchButtons/Right"]
+[node name="Ok" type="TouchScreenButton" parent="CanvasLayer/TouchButtonsPause/Right"]
 position = Vector2(-255, 0)
 texture_normal = ExtResource("13_vxixu")
 action = "MenuConfirm"
