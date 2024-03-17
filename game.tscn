@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ci7w0j3fy13pi"]
+[gd_scene load_steps=53 format=3 uid="uid://ci7w0j3fy13pi"]
 
 [ext_resource type="Texture2D" uid="uid://6a8llpsho646" path="res://Textures/FloorTexture.png" id="1_6l14n"]
 [ext_resource type="Script" path="res://Scripts/JoelMovements.gd" id="2_klvbf"]
@@ -15,9 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://dvu3l1s8y4xnf" path="res://Textures/Touch Buttons/AttackButton.png" id="8_61562"]
 [ext_resource type="Texture2D" uid="uid://bubu2uh6gcqc2" path="res://Textures/Touch Buttons/StingerButton.png" id="9_p15gg"]
 [ext_resource type="PackedScene" uid="uid://dmle2nwaecon7" path="res://platform.tscn" id="10_n56ep"]
+[ext_resource type="AudioStream" uid="uid://00u7u4wd00fr" path="res://Sounds/Menu/Select.wav" id="10_pmhk3"]
 [ext_resource type="Texture2D" uid="uid://c43nueh1020nw" path="res://Textures/Touch Buttons/LeftButton.png" id="11_f5sex"]
+[ext_resource type="AudioStream" uid="uid://0e7tulo1bnel" path="res://Sounds/Menu/Return.wav" id="11_yw1am"]
 [ext_resource type="Texture2D" uid="uid://olk4nwvalbsp" path="res://Textures/Touch Buttons/RightButton.png" id="12_og731"]
 [ext_resource type="Texture2D" uid="uid://cns87cpy0vsdv" path="res://Textures/Touch Buttons/BackButton.png" id="13_lmq0m"]
+[ext_resource type="Texture2D" uid="uid://7mdkcc11lppg" path="res://Textures/Touch Buttons/OkButton.png" id="13_vxixu"]
 [ext_resource type="AudioStream" uid="uid://cgfwwxeumh0ho" path="res://Sounds/Joel/Dodge.wav" id="18_5cpx0"]
 [ext_resource type="AudioStream" uid="uid://dh1p2rjotv8pc" path="res://Sounds/Joel/Jump.wav" id="19_ahekc"]
 [ext_resource type="AudioStream" uid="uid://cwfcyo58fs3yp" path="res://Sounds/Joel/SwordSwing.wav" id="20_51qd3"]
@@ -116,6 +119,78 @@ tracks/1/keys = {
 _data = {
 "fade_in": SubResource("Animation_mglhw")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dasfm"]
+bg_color = Color(0.00392157, 0.564706, 0.847059, 0.627451)
+
+[sub_resource type="GDScript" id="GDScript_7r4lo"]
+script/source = "extends Panel
+
+var menu_open: bool = false
+
+func _input(event):
+	if event.is_action_pressed(\"Menu\") and not visible:
+		open_menu()
+	elif (event.is_action_pressed(\"Menu\") or event.is_action_pressed(\"MenuBack\")) and menu_open:
+		close_menu()
+
+func open_menu():
+	get_tree().paused = true
+	$PauseSound.play()
+	show()
+	menu_open = true
+
+func close_menu():
+	hide()
+	$PauseSoundExit.play()
+	get_node(\"/root/Game/CanvasLayer/TouchButtons\").show()
+	menu_open = false
+	await(get_tree().create_timer(0.1).timeout)
+	get_tree().paused = false
+
+func _process(delta):
+	if menu_open:
+		update_button_prompts()
+
+	if Input.is_action_just_pressed(\"MenuConfirm\") and menu_open:
+		close_menu()
+		get_tree().paused = false
+		get_node(\"/root/Game/CanvasLayer/TouchButtons\").hide()
+		get_tree().change_scene_to_file(\"res://menu.tscn\")
+
+func update_button_prompts():
+	var confirm: String
+	var back: String
+	
+	match Input.get_joy_name(0):
+		\"XInput Gamepad\":
+			confirm = \"A\"
+			back = \"B or Menu\"
+		\"PS4 Controller\":
+			confirm = \"Cross\"
+			back = \"Circle or Options\"
+		\"PS5 Controller\":
+			confirm = \"Cross\"
+			back = \"Circle or Options\"
+		\"\":
+			if DisplayServer.is_touchscreen_available():
+				confirm = \"OK\"
+				back = \"BACK\"
+			else:
+				confirm = \"Enter\"
+				back = \"Esc\"
+		_:
+			confirm = \"A\"
+			back = \"B or Start\"
+
+	var label = $PauseLabel.text
+	label = label.replace(\"{CONFIRM}\", confirm)
+	label = label.replace(\"{BACK}\", back)
+	$PauseLabel.text = label
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk543"]
+font_size = 41
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1csh"]
 size = Vector2(1920, 20)
@@ -410,6 +485,70 @@ visibility_mode = 1
 position = Vector2(-575, -320)
 texture_normal = ExtResource("9_p15gg")
 action = "AltAttack"
+visibility_mode = 1
+
+[node name="PauseMenu" type="Panel" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -175.0
+offset_right = 508.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dasfm")
+script = SubResource("GDScript_7r4lo")
+
+[node name="PauseLabel" type="Label" parent="CanvasLayer/PauseMenu"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Paused
+
+Press {CONFIRM} to return to menu.
+Press {BACK} to resume game."
+label_settings = SubResource("LabelSettings_kk543")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PauseSound" type="AudioStreamPlayer" parent="CanvasLayer/PauseMenu"]
+stream = ExtResource("10_pmhk3")
+volume_db = -10.0
+
+[node name="PauseSoundExit" type="AudioStreamPlayer" parent="CanvasLayer/PauseMenu"]
+stream = ExtResource("11_yw1am")
+volume_db = -10.0
+
+[node name="TouchButtons" type="Node2D" parent="CanvasLayer/PauseMenu"]
+position = Vector2(-452, -365)
+script = ExtResource("3_md8pn")
+
+[node name="Left" type="Node2D" parent="CanvasLayer/PauseMenu/TouchButtons"]
+position = Vector2(1870, 680)
+
+[node name="Right" type="Node2D" parent="CanvasLayer/PauseMenu/TouchButtons"]
+position = Vector2(1870, 680)
+
+[node name="Back" type="TouchScreenButton" parent="CanvasLayer/PauseMenu/TouchButtons/Right"]
+position = Vector2(-575, 0)
+texture_normal = ExtResource("13_lmq0m")
+action = "MenuBack"
+visibility_mode = 1
+
+[node name="Ok" type="TouchScreenButton" parent="CanvasLayer/PauseMenu/TouchButtons/Right"]
+position = Vector2(-255, 0)
+texture_normal = ExtResource("13_vxixu")
+action = "MenuConfirm"
 visibility_mode = 1
 
 [node name="Background" type="ColorRect" parent="."]

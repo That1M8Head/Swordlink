@@ -133,8 +133,6 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://victory.tscn")
 	if health_bar.value <= 0:
 		get_tree().change_scene_to_file("res://death_screen.tscn")
-	if Input.is_action_just_pressed("Menu"):
-		get_tree().change_scene_to_file("res://menu.tscn")
 
 func _physics_process(delta):
 	var sword_animation: AnimationPlayer = $JoelSprite/Sword/SwordAnim
