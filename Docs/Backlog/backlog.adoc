@@ -1,4 +1,21 @@
-= Swordlink: Glitchfall Chronicles Backlog
+= Swordlink: Glitchfall Chronicles: Backlog
+
+== About
+
+=== Software Tools
+
+For Swordlink: Glitchfall Chronicles, I used the Godot Engine for the bulk of
+the project, a free and open-source game engine using the GDScript language,
+which is a wrapper around the C++ language with Python-like syntax.
+
+For drawing sprites for the character and his sword, I used the GIMP, the GNU
+Image Manipulation Program, a free/libre photomanipulation application, which
+works well for sprite art despite not being designed specifically for it.
+
+=== Source Code
+
+The source code for Swordlink: Glitchfall Chronicles is available on GitHub,
+at https://github.com/That1M8Head/Swordlink.
 
 == Conceptual Stages
 
@@ -184,34 +201,501 @@ image:quit.png[Quit Prompt]
 
 === Menu Scripting
 
+For scripting, I resorted to using a selection system with Godot Engine's
+`modulate` property to change the colour of the menu items when selected.
+
+The selected menu item, when the `MenuConfirm` action was pressed, would
+trigger the selected menu item's functionality, defined in a `match` statement.
+
+[gdscript]
+----
+func select_option(index):
+	$MenuOptions.get_children()[selected_option_index].modulate = Color(1, 1, 1)
+	selected_option_index = index
+	$MenuOptions.get_children()[selected_option_index].modulate = Color(0, .5, 1)  # Highlight selected option
+
+func select_next_option():
+	$MenuMove.play()
+	select_option((selected_option_index + 1) % $MenuOptions.get_children().size())
+
+func select_previous_option():
+	$MenuMove.play()
+	select_option((selected_option_index - 1 + $MenuOptions.get_children().size()) % $MenuOptions.get_children().size())
+
+func execute_selected_option():
+	# Execute the action corresponding to the selected option
+	match selected_option_index:
+		0:
+			start_new_game()
+		1:
+			open_options_menu()
+		2:
+			exit_game()
+----
+
 === Enemy Design
 
-=== Enemy Movement
+Originally, I was going to design the enemies myself, but at the last minute
+I decided to just take an enemy from DOOM - the Pinky, known in-game as the
+Demon.
 
-=== Enemy Scripting
+In Swordlink, the Pinky behaves much like it does in DOOM, running up to the
+player and rapidly performing a bite attack.
+
+image:pinky.png[The Pinky]
+
+I implemented a feature where, upon taking damage, a hit number will appear
+above an enemy, indicating how much damage was taken, in addition to a small
+health bar. Both of these elements would gradually fade away after a short
+time, until the enemy gets hit again.
+
+image:pinky-damage.png[The Pinky Taking Damage]
+
+I didn't have to do much to get the Pinky to work - I simply took the basic
+CharacterBody2D script and adapted it to make an enemy, setting the layer and
+layer masks and creating instances of it in the main `game.tscn` scene.
 
 === Health System
 
+For a health system, I simply created a `health` variable inside Joel's script
+and included functionality to constantly update the health bar inside of the
+`_process` function.
+
+[gdscript]
+----
+var health: int
+
+...
+
+func _ready():
+	...
+	health = 100
+    ...
+
+func _process(delta):
+	var health_bar = get_node("/root/Game/CanvasLayer/HUD/HealthBar")
+	var health_tween = get_node("/root/Game/CanvasLayer/HUD/Tween").create_tween()
+	health_tween.tween_property(health_bar, "value", health, 0.1)
+    ...
+----
+
+The `health` variable itself is set in both the `deal_damage` and `damage_self`
+functions, the former increasing the player's health if the attack exceeds
+the enemy's health value, and the latter decreasing the player's health
+regardless of how much damage was dealt.
+
+[gdscript]
+----
+...
+func deal_damage(body, damage: int, knockback: Vector2):
+	$HitSound.play()
+	var difficulty_handler = get_node("/root/DifficultyHandling")
+	if damage > body.health and difficulty_handler.level < 3:
+		var health_reward = damage / 6
+		health += health_reward * (style_rank + 1)
+	style_duration += damage * 48 if not body.is_on_floor() else damage * 19
+	var flip = -1 if $JoelSprite.flip_h else 1
+	body.take_damage(damage, Vector2(knockback.x * flip, knockback.y))
+
+func damage_self(amount: int):
+	if dashing:
+		return
+	health -= amount
+	var style_rank_meter = get_node("/root/Game/CanvasLayer/HUD/Style/Meter")
+	style_duration -= style_rank_meter.max_value / 3
+...
+----
+
 === Style System
 
-=== HUD Scripting
+For the style system, the process was largely the same - creating variables,
+`style_rank` and `style_duration` and updating them in the `_process` function
+as well as the custom `deal_damage` function, which is called whenever
+an enemy enters the player's hitbox.
+
+[gdscript]
+----
+func deal_damage(body, damage: int, knockback: Vector2):
+    ...
+	style_duration += damage * 48 if not body.is_on_floor() else damage * 19
+    ...
+----
 
 === Failure Screen
 
+After a system was implemented to have the player lose health upon taking
+damage, I decided a simple "Game Over" screen simply wasn't enough. I wanted
+to make the player laugh - or at least amused - when they failed at the game.
+
+With this in mind, I took inspiration from a DOOM II mod named Reelism 2, which
+includes funny death messages and descriptions for the player's status.
+
+image:reelism-2-death.png[Reelism 2 Death]
+
+image:reelism-2-stats.png[Reelism 2 Stats]
+
+So, in Swordlink, I did a similar thing - a randomised death message and
+a randomised funny quote, either to make the player laugh or mock them
+for being bad, some messages and quotes being references to other games.
+
+image:death-screen-1.png[Death Screen]
+
+image:death-screen-2.png[Death Screen]
+
+image:death-screen-3.png[Death Screen]
+
 === Easter Eggs
+
+==== Guru Meditation
+
+The biggest Easter egg in Swordlink is probably the Amiga-style Guru Meditation
+error message.
+
+image:guru-meditation.png[Guru Meditation Error]
+
+This error screen is a direct reference to the Guru Meditation error from the
+AmigaOS operating system for the Commodore Amiga line of home computers,
+specifically versions of AmigaOS between 1.0 and 3.x, since 4.0 onwards,
+this error was replaced with the more user-friendly and less catastrophic
+"Grim Reaper".
+
+image:guru-meditation-original.png[Original Guru Meditation Error]
+
+And there are layers to this Easter egg - left-clicking, as the error instructs
+you to do, will return you to the main menu without another word, but
+_right_-clicking, however, will bring up the second Easter egg, known as
+ROMWack.
+
+==== ROMWack
+
+ROMWack directly takes its name from the AmigaOS debugger, also called ROMWack,
+however, in Swordlink, it's a full command-line environment.
+
+image:romwack.png[ROMWack]
+
+ROMWack is a sort of developer console within the context of Swordlink - as
+well as that, she's also a character in her own right. You can enter Unix-style
+commands, and get either the console or ROMWack to say something.
+
+For example, entering `hello` will prompt ROMWack to say `Hi! :)`
+
+I put a lot of effort into this Easter egg, creating a whole command-line
+environment that pays homage to one of my most favourite error messages in
+computing history.
 
 === Difficulty Selection
 
+After a lot of refinement and playtesting, I decided that the difficulty was
+too low, so I decided to speed up the enemies' attack rate. This proved to
+be much more challenging, but when I built the game for Android to test on
+my phone, I noticed it was a bit too hard. So instead of going back on this,
+I decided to fully implement a difficulty selection system.
+
+image:difficulty-selection.png[Difficulty Selection]
+
+For these difficulties, I took minor inspiration from the Halo series and Devil
+May Cry 5 when it came to the descriptions.
+
+*Framecapped* difficulty was the easy difficulty, and a direct port of the
+original enemy behaviour, mainly for people playing on touch devices.
+
+The new *Boosted*, *Overclocked* and *Glitchfall* difficulties were much harder
+in comparison - Glitchfall especially being the worst, since not only do enemies
+attack just as fast and on Overclocked, but Joel's health will no longer
+regenerate upon defeating enemies.
+
+To handle the difficulty selection, I reused the same code I used for the
+main menu, since it worked perfectly and was fairly easy to implement.
+
+To make every script aware of the difficulty level, I attached a script,
+`DifficultyHandling.gd`, as an autoload, which is in a global scope and
+accessible from any script.
+
+[gdscript]
+----
+extends Node
+
+enum DIFFICULTY {
+	FRAMECAPPED,
+	BOOSTED,
+	OVERCLOCKED,
+	GLITCHFALL
+}
+
+var level := DIFFICULTY.BOOSTED
+----
+
+And, for example, if I wanted to update the enemies' attack speed, I could,
+first of all, create an instance of the `DifficultyHandling` script,
+
+[gdscript]
+----
+@onready var difficulty_handler = get_node("/root/DifficultyHandling")
+----
+
+and then update the enemies' attack speed accordingly.
+
+[gdscript]
+----
+var speed = 100.0
+...
+var total_time = 0.3
+var current_time = 0.0
+
+func _ready():
+	match difficulty_handler.level:
+		difficulty_handler.DIFFICULTY.FRAMECAPPED:
+			speed = 100.0
+			total_time = 0.5
+		difficulty_handler.DIFFICULTY.BOOSTED:
+			speed = 200.0
+			total_time = 0.3
+		difficulty_handler.DIFFICULTY.OVERCLOCKED:
+			speed = 400.0
+			total_time = 0.2
+		difficulty_handler.DIFFICULTY.GLITCHFALL:
+			speed = 400.0
+			total_time = 0.2
+    ...
+----
+
 === Help Pages
+
+After deciding I was unhappy with the original help screen being hard to read,
+due to how much information I had packed into one single space, I decided to
+implement a proper help page system the player could scroll through.
+
+image:help.png[Help Page]
+
+I decided to make this simple and text-based, just like the main menu, so the
+player could scroll through the pages with the directional inputs, *Up* or
+*Left* sending the player back a page, and *Down* or *Right* sending them
+forward.
+
+In these pages was a more robust explanation of how the controls work, and the
+special techniques available to Joel.
+
+image:help-page-5.png[Basic Controls]
+
+image:help-page-6.png[Special Attacks]
+
+This in itself was much nicer on the eyes and easier to read, which was a
+much-needed improvement over the original help screen which tried to cram as
+much detail as possible in a standard 1920x1080 screen.
 
 === Victory Screen
 
+I procrastinated on this feature for the longest time - the victory screen,
+triggered upon defeating all the enemies, wasn't implemented until much later.
+
+I largely followed the same process as I did for the death screen, only with
+a bright blue background instead of black, and with more congratulatory remarks.
+
+image:victory-screen.png[Victory Screen]
+
 === Pause Menu
 
-== Refinement
+Another thing I didn't really do until much later was a pause menu. Before,
+pressing the start button (Menu on an Xbox controller) would just return the
+player to the main menu, completely forgetting about the previous state of the
+game.
+
+I eventually decided upon implementing a simple pause menu - rather than waste
+time trying to implement a proper menu based on the main menu code, I decided
+to use a simple message, handling the `MenuConfirm` action to go back to
+the menu, and the `MenuBack` action to return to the game.
+
+image:pause-menu.png[Pause Menu]
 
 == Mechanics
 
-== Finalisation
+=== Controls
+
+The control scheme is based off of the control scheme of the Devil May Cry
+series, starting with DMC2.
+
+On an Xbox controller, it uses the left stick for movement, the Y button for
+attacks, the A button for jumping, the B button for evasions and the RB or RT
+button to enable Mode-Shift, as well as the X button used for easy input of
+special attacks, which is not a DMC thing, but the button wasn't used for
+anything else, considering Joel lacks any long-range options.
+
+The special attack button was created out of a need for a simpler control
+scheme on touchscreen devices, where trying to use Mode-Shift using only a
+frontal panel of non-tactile controls would be too much of a hassle.
+
+=== Special Attacks
+
+Joel is able to use three special attacks - Stinger, Updraft and Downslash.
+
+Stinger is directly based off the Stinger attack that the Devil May Cry series
+implements, where the protagonist holds his sword in a thrusting motion and
+dashes forward.
+
+Updraft is based off of the High Time attack from the Devil May Cry series,
+which involves the protagonist swinging his sword upwards, knocking enemies
+into the air. Like High Time, if you hold down the input for Updraft, Joel will
+be sent up in the air along with his target.
+
+Downslash is loosely based off the Helm Breaker attack from the Devil May Cry
+series, which involves the protagonist swinging his sword downwards while
+sending himself straight downwards, dealing high damage to enemies below.
+
+=== Mode-Shift
+
+The Mode-Shift mechanic is the answer to the lock-on feature used in the Devil
+May Cry games, only instead of locking on to anything, Joel will only lock his
+direction, allowing him to access Stinger, Updraft and Downslash through
+directional inputs using the Attack button.
+
+Mode-Shift will additionally slow Joel's movement speed down and completely
+stop all momentum, which is necessary for the special attacks' directional
+inputs.
+
+== Deployment
+
+When Swordlink's Public University Demo is finished, I will be deploying it
+through GitHub Releases. itch.io is another consideration, but I want to
+delay that until I can create properly original sprites and animations.
+
+When I finish Swordlink proper, with a whole set of levels and properly
+refined combat mechanics, I will consider deploying it through Steam, for
+money.
 
 == Differences from the Pitch Presentation
+
+I'll be going slide by slide, comparing each element to how it matches the
+current status of the game.
+
+=== Slide 2: Title & Introduction
+
+image:pitch-title-and-introduction.png[Title & Introduction]
+
+* *Title:* Still the same title of "Swordlink: Glitchfall Chronicles".
+* *Genre:* The stylish action hack-and-slash elements are in the demo,
+but the puzzle elements are not.
+* *Platforms:* Remained available for Windows and Linux, but also extended to
+Android.
+* *Game engine:* Remained the same, Godot Engine.
+* *Licensing model:* Remained open source.
+
+=== Slide 3: Plot
+
+image:pitch-plot.png[Plot]
+
+The Public University Demo's plot is loosely based off the plot in the pitch
+presentation, but it takes place non-canonically before the events described
+in the presentation.
+
+=== Slide 4: Gameplay
+
+image:pitch-gameplay.png[Gameplay]
+
+The 2D hack-and-slash gameplay is still intact, with sword combos, aerial sword
+combos, launching and dashing, but the double jump and wall jump were not
+implemented.
+
+The style meter got changed, ranging from F to S rather than D to S, and the
+system to reward varied attacks was not implemented in the demo.
+
+The parry mechanic detailed in this slide was not added, mainly due to the
+simpler combat system in the demo.
+
+=== Slide 5: Game Engine
+
+image:pitch-gameengine.png[Game Engine]
+
+I stood by my original decision to use the Godot Engine, and unlike what I
+may have had concerns with, not having access to an asset store was not
+a concern.
+
+=== Slide 6: Game Mechanic - Glitched State
+
+image:pitch-glitchedstate.png[Glitched State]
+
+This game mechanic was not implemented at all in the demo due to a lack of time
+and development resources - upon losing all health, the player will just be
+taken to a minimalist game over screen.
+
+=== Slide 7: Minigame - Programming
+
+image:pitch-programming.png[Programming Minigame]
+
+As detailed above several times, these minigames were not implemented, as the
+Public University Demo's focus is entirely on combat. Moreover, programming
+minigames are intrinsically tied to the plot, and the demo lacks one.
+
+=== Slide 8: Graphics & Art Style
+
+image:pitch-graphics.png[Graphics]
+
+Rather than a comic book style, I decided to forgo a consistent style altogether
+for the sake of the Public University Demo, however I intend to use a
+comic book-inspired pixel art style in the future.
+
+=== Slide 9: Marketing & Monetisation
+
+image:pitch-marketing.png[Marketing]
+
+The target audience remains in the 18- to 25-year-old demographic, since the
+game focuses on rapid and dynamic combat against demons, however, as the slide
+describes, the game will be fine for minors between 13 and 17 years of age to
+play.
+
+== Requirements
+
+=== User
+
+* Develop a compelling narrative
+  ** The Public University Demo contains no story, so this requirement
+  was not met out of consideration for time.
+* Design dynamic gameplay
+  ** The combat is indeed fast-paced and dynamic, and while there's room for
+  improvement, this requirement was met to a satisfactory extent.
+* Integrate programming minigames
+  ** The Public University Demo focuses entirely on combat, so this requirement
+  was not met, similarly to the narrative.
+* Create good-looking visuals and audio
+  ** Currently, the visuals are rather rough or taken from other games, and the
+  audio elements were entirely taken from existing games, so this requirement
+  was not met.
+* Optimise performance across platforms
+  ** The game performs decently on both Windows and Android platforms, so this
+  requirement was met to an extent.
+* Implement educational value
+  ** Since programming minigames were not implemented, which is a prerequisite
+  for this requirement, it was not met.
+* Test and refine game mechanics
+  ** This requirement was met - Swordlink has gone through a high level of
+  testing.
+
+=== System
+
+* Use Godot Engine
+  ** The Godot Engine was used for the development of the game, so this
+  requirement was met.
+* Create sprites and animations
+  ** This requirement is not met, because there are non-original sprites
+  in the game, and the animations are placeholders.
+* Create music and sound effects
+  ** The audio is used from existing games, so this requirement was not
+  met.
+
+== Test Plan
+
+|==============================
+| ID | Test | Expected | Windows | Android
+| 1  | Menus | Menu navigation, selection, difficulty selection and exit prompt work. | ✅ | ✅
+| 2  | Movement | The player can move left and right. | ✅ | ✅
+| 3  | Attack | The player can attack in a combo, and the sword animation plays properly for each direction. | ✅ | ✅
+| 4  | Jump | The jump works and the player can get up onto higher platforms. | ✅ | ✅
+| 5  | Enemy | Enemies move, turn and attack the player. | ✅ | ✅
+| 6  | Health | Health bar updates and tweens. | ✅ | ✅
+| 7  | Style | The style meter increases as the player attacks and decreases as the player takes damage or waits. | ✅ | ✅
+| 8  | Controller input | The game supports PlayStation and Xbox controllers. | ✅ | ✅, but only PS5 controller tested
+| 8  | Touch controls | The touch controls appear on touch-enabled devices and work throughout the game. | ✳️, no touchscreen on Windows | ✅
+| 9  | Game over | The game over screen shows when the player has no health left. | ✅ | ✅
+| 10 | Victory | The victory screen shows when all enemies are defeated. | ✅ | ✅
+| 11 | Pause | The pause menu works. | ✅ | ✅
+| 12 | Easter egg | The Guru Meditation and ROMWack Easter eggs work. | ✅ | ✅
+|==============================
