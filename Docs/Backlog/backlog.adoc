@@ -1,0 +1,217 @@
+= Swordlink: Glitchfall Chronicles Backlog
+
+== Conceptual Stages
+
+In Swordlink's conceptual stages, I took heavy inspiration from the stylish
+action game series Devil May Cry. Initially, Swordlink was going to be a silly
+non-serious 2D DMC-like named "Guy with a Sword".
+
+I eventually decided I wanted to have something more world-built and grounded
+in a proper fantasy world, set in a future where the hubris of man has led to
+the world being inhabited by digital demons.
+
+I got this idea from DOOM - a game with a story about the hubris of man leading
+to the forces of Hell invading and ransacking Mars, its moons, and eventually
+the Earth.
+
+I wanted to have a character that was just a normal guy, but also a programmer,
+which fits with the dystopian setting of Swordlink, while also having a
+protagonist that the player might be able to relate to.
+
+Eventually I settled on his name, Joel, initially named after no one but
+retroactively named after the Vinesauce streamer. Why? Because it's funny,
+really. No special reason.
+
+== Pitch Presentation
+
+When it came time to create a pitch presentation for university, this is where
+I decided on the core idea for Swordlink - a stylish action hack-and-slash
+with programming puzzle elements.
+
+image:pitch-title-and-introduction.png[Pitch Presentation - Title & Introduction]
+
+This is also where I decided on the initial idea for the game's plot: a young
+man and brilliant programmer, Joel, wielding a tech sword that he built himself,
+what would later be named the Circuit Saber, described as the only weapon
+capable of fighting against "otherworldly threats", describing the digital
+demons in the game's conceptual stages.
+
+One key thing this presentation laid out was that the world would be constantly
+flipping between the tangible reality and the digital realm, and this is what
+would allow these demons in to the physical world.
+
+image:pitch-plot.png[Pitch Presentation - Plot]
+
+The presentation also detailed the gameplay features of the game, namely the 2D
+hack-and-slash gameplay, with a style meter, combos, air combos, launching
+attacks, double jumping, wall jumping and similar mechanics inspired by the
+Devil May Cry games.
+
+Interestingly, the presentation detailed the style ranks D to S, however in
+the game itself, the ranks range from F to S. The game also detailed mechanics
+that are not present in the game, such as double jumping, wall jumping, parrying
+and taunting.
+
+image:pitch-gameplay.png[Pitch Presentation - Gameplay]
+
+== Initial Development
+
+=== Stage Design
+
+At the beginning of the development process, I had to decide on the initial
+design for the game's only level. I decided to take inspiration from the stylish
+action FPS game ULTRAKILL - specifically, the Cyber Grind endless arena game
+mode.
+
+image:ultrakill-cyber-grind.png[ULTRAKILL Cyber Grind]
+
+The main inspiration taken from the Cyber Grind is the grid-like aesthetic
+and relatively simple level design -- perfect for a simple gameplay demo
+that focuses more on combat than impressive level design.
+
+image:level-design.png[Level]
+
+(Screenshot from commit "Initial commit",
+6aa29472fcd5385ade2305edb786c44e74ababbb, which is not indicative of the initial
+level design.)
+
+While basic and unrefined, this initial level design would suit the gameplay
+of Swordlink's Public University Demo, which focuses entirely on combat
+elements, not so much on intricate level design.
+
+=== Character Design
+
+For a character sprite, I was going to spend countless hours designing and
+refining pixel art for Swordlink's protagonist, Joel, but ultimately decided
+it would take too much time, and settled on a much simpler image with no
+animations, the Circuit Saber being separate from Joel himself, so that I
+could animate it in Godot Engine using rotations rather than drawing Joel
+holding the sword as one sprite, for each frame.
+
+image:joel.png[Joel]  image:joelsword.png[Circuit Saber]
+
+I based Joel's design off a young man, with spiked brown hair, a purple shirt,
+blue jeans and Sonic the Hedgehog-inspired shoes.
+
+I based the design of the Circuit Saber on a sort of combination between a
+broadsword and a baseball bat, with a red light on the back which was meant
+to be a sword of indicator for the sword's power.
+
+If I were given more time to work on these sprites, I would have taken
+heavy inspiration from the Devil May Cry series, perhaps a sort of blend between
+the characters Dante and Vergil, and I would have taken inspiration from the
+indie platformer Pizza Tower for exaggerated animations and graphics.
+
+=== Character Movement
+
+The character movement of Joel grew incrementally, starting out with the
+basic Godot Engine CharacterBody2D script, and then gradually adding more
+features like jumping, evading, attacking, aerial momentum, and the Mode-Shift
+mechanic.
+
+A key part of making the movement in Swordlink work was making sure Joel's
+momentum was preserved while also allowing him to control his direction both
+on the ground and in the air, allowing for high-speed movement with max control.
+
+In addition to this, the Mode-Shift mechanic, to make it less challenging to
+land attacks where you want them to land, will slow Joel down and inhibit his
+momentum entirely.
+
+=== HUD Design
+
+The first thing I did when designing the HUD was create a simple health bar and
+a rank with an associated description. This rank would eventually become the
+style meter.
+
+image:old-hud.png[Old HUD]
+
+There was no proper implementation yet - the health bar had no functions to
+update concurrently with Joel's actual health (since it didn't exist yet) and
+there was no scripting at all for the style meter, so it just remained at F.
+
+The style meter would be highly inspired by the system in Devil May Cry 3,
+where attacking enemies would fill up the meter, waiting or getting hit would
+make the meter drop, if the meter filled it would raise your rank, and if the
+meter emptied it would lower your rank.
+
+The HUD went through several iterations before settling on a final design -
+the health bar used tweening to animate the health bar, and the style meter
+used a simple growing animation when gaining a new rank.
+
+image:current-hud.png[Current HUD]
+
+The health bar was given a slanted blue appearance with a light blue background,
+and the style meter was given a more rounded appearance with an outline, being
+placed underneath the style rank.
+
+=== Menu Design
+
+The menu was the part of Swordlink I probably spent the least amount of time
+on. While I still worked on it a lot, it wasn't nearly as much as how much
+time I put into working on the other parts of the game.
+
+I decided not to reinvent the wheel, opting for a simple text-based menu
+using the Godot Engine's Label nodes for menu items.
+
+image:menu.png[Menu]
+
+This is where I came up with the idea of making this edition of Swordlink the
+"Public University Demo", since it was the first public demo created entirely
+for this university project.
+
+I decided not to make this too extravagant for the sake of simplicity, so I
+could actually put my limited time towards the parts of the game that actually
+mattered.
+
+The "NEW GAME" option originally started the game straight away without a
+further prompt, but I decided later to add a difficulty menu that the user could
+choose to back out of if they wanted to.
+
+image:difficulty-menu.png[Difficulty Menu]
+
+The "INFO & CONTROLS" option was the main menu option that originally brought
+up the help screen, detailing what Swordlink was and what controls were
+available. This was later extended to a full help menu.
+
+image:help.png[Help Menu]
+
+The "QUIT TO <OS name>" option initially quit the game immediately, but I
+quickly decided I wanted to have a DOOM-style quit prompt, with randomised
+funny messages to almost try and dissuade the player from quitting, even
+opting for the old DOS game-style Y to quit and N to go back.
+
+image:quit.png[Quit Prompt]
+
+=== Menu Scripting
+
+=== Enemy Design
+
+=== Enemy Movement
+
+=== Enemy Scripting
+
+=== Health System
+
+=== Style System
+
+=== HUD Scripting
+
+=== Failure Screen
+
+=== Easter Eggs
+
+=== Difficulty Selection
+
+=== Help Pages
+
+=== Victory Screen
+
+=== Pause Menu
+
+== Refinement
+
+== Mechanics
+
+== Finalisation
+
+== Differences from the Pitch Presentation
